@@ -14,12 +14,12 @@ galaxy_info:
     - 7
   - name: Debian
     versions:
-    - 8
+    - jessie
   - name: Ubuntu
     versions:
     - precise
     - trusty
-    - xenail
+    - xenial
   galaxy_tags:
     - web
     - system
