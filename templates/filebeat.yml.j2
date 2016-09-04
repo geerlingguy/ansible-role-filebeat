@@ -1,1 +1,17 @@
-# TODO
+filebeat:
+  # List of prospectors to fetch data.
+  prospectors:
+    # Each - is a prospector. Below are the prospector specific configurations
+    -
+      # Paths that should be crawled and fetched. Glob based paths.
+      # For each file found under this path, a harvester is started.
+      paths:
+        - "/var/log/*.log"
+
+      # Type of the files. Based on this the way the file is read is decided.
+      # The different types cannot be mixed in one prospector
+      #
+      # Possible options are:
+      # * log: Reads every line of the log file (default)
+      # * stdin: Reads the standard in
+      input_type: log
