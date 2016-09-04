@@ -15,3 +15,11 @@ filebeat:
       # * log: Reads every line of the log file (default)
       # * stdin: Reads the standard in
       input_type: log
+
+# Configure what outputs to use when sending the data collected by the beat.
+# Multiple outputs may be used.
+output:
+  ### Elasticsearch as output
+  elasticsearch:
+    # Array of hosts to connect to.
+     hosts: ["localhost:9200"]
