@@ -6,11 +6,12 @@
       apt: update_cache=yes
       when: ansible_os_family == 'Debian'
 
+    - name: Install test dependencies (RedHat).
+      package: name=which state=present
+      when: ansible_os_family == 'RedHat'
+
     - name: Install test dependencies.
-      package: name={{ item }} state=present
-      with_items:
-        - curl
-        - which
+      package: name=curl state=present
 
   roles:
     - geerlingguy.java
