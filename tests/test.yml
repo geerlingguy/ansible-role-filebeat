@@ -7,7 +7,10 @@
       when: ansible_os_family == 'Debian'
 
     - name: Install test dependencies.
-      package: name=curl state=present
+      package: name={{ item }} state=present
+      with_items:
+        - curl
+        - which
 
   roles:
     - geerlingguy.java
