@@ -10,7 +10,7 @@ filebeat_output_elasticsearch_hosts:
 
 filebeat_output_logstash_enabled: true
 filebeat_output_logstash_hosts:
-  - "localhost:5000"
+  - "localhost:5044"
 
 filebeat_ssl_dir: /etc/pki/logstash
 filebeat_ssl_certificate_file: ""
