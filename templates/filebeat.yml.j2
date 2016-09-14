@@ -58,7 +58,7 @@ output:
 
 {% if filebeat_ssl_certificate_file and filebeat_ssl_key_file %}
     # tls configuration. By default is off.
-    #tls:
+    tls:
       # List of root certificates for HTTPS server verifications
       #certificate_authorities: ["/etc/pki/root/ca.pem"]
 
