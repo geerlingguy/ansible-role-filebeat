@@ -129,4 +129,21 @@ output:
       # Configure curve types for ECDHE based cipher suites
       #curve_types: []
 {% endif %}
+
+{% if enable_logging %}
+logging:
+  ### filebeat log
+  level: {{ log_level }}
+
+  # enable file rotation with default configuration
+  to_files: true
+
+  # do not log to syslog
+  to_syslog: false
+
+  files:
+    path: {{ log_dir }}
+    name: {{ log_filename }}
+    keepfiles: 7
+{% endif %}
 {% endif %}

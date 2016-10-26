@@ -12,6 +12,11 @@ filebeat_output_logstash_enabled: true
 filebeat_output_logstash_hosts:
   - "localhost:5044"
 
+enable_logging: false
+log_level: warning
+log_dir: /var/log/mybeat
+log_filename: mybeat.log
+
 filebeat_ssl_dir: /etc/pki/logstash
 filebeat_ssl_certificate_file: ""
 filebeat_ssl_key_file: ""
