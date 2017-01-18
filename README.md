@@ -48,7 +48,7 @@ To generate a self-signed certificate/key pair, you can use use the command:
 
 Note that filebeat and logstash may not work correctly with self-signed certificates unless you also have the full chain of trust (including the Certificate Authority for your self-signed cert) added on your server. See: https://github.com/elastic/logstash/issues/4926#issuecomment-203936891
 
-Variable filebeat_ssl_insecure is available if you are willing to remove certificate checking
+Variable `filebeat_ssl_insecure` is available if you are willing to remove certificate checking
 
 ## Dependencies
 
