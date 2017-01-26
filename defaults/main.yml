@@ -1,4 +1,6 @@
 ---
+filebeat_create_config: true
+
 filebeat_prospectors:
   - input_type: log
     paths:
