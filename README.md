@@ -31,10 +31,10 @@ Whether to enable Elasticsearch output, and which hosts to send output to.
 
 Whether to enable Logstash output, and which hosts to send output to.
 
-    enable_logging: false 
-    log_level: warning
-    log_dir: /var/log/filebeat
-    log_filename: filebeat.log
+    filebeat_enable_logging: false 
+    filebeat_log_level: warning
+    filebeat_log_dir: /var/log/filebeat
+    filebeat_log_filename: filebeat.log
 
 Filebeat logging.
 
