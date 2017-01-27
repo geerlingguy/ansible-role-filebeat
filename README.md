@@ -35,6 +35,13 @@ Whether to enable Elasticsearch output, and which hosts to send output to.
 
 Whether to enable Logstash output, and which hosts to send output to.
 
+    filebeat_enable_logging: false 
+    filebeat_log_level: warning
+    filebeat_log_dir: /var/log/filebeat
+    filebeat_log_filename: filebeat.log
+
+Filebeat logging.
+
     filebeat_ssl_dir: /etc/pki/logstash
 
 The path where certificates and keyfiles will be stored.
