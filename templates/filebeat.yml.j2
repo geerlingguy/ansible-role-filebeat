@@ -133,13 +133,13 @@ output:
 
 {% if filebeat_enable_logging %}
 logging:
-  ### filebeat log
+  ### Filebeat log
   level: {{ filebeat_log_level }}
 
-  # enable file rotation with default configuration
+  # Enable file rotation with default configuration
   to_files: true
 
-  # do not log to syslog
+  # Do not log to syslog
   to_syslog: false
 
   files:
