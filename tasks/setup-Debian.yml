@@ -1,5 +1,5 @@
 ---
-- name: Ensure depdency is installed (Ubuntu).
+- name: Ensure dependency is installed (Ubuntu).
   apt: name=apt-transport-https state=present
 
 - name: Add Elasticsearch apt key.
