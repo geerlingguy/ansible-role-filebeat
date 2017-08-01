@@ -63,6 +63,8 @@ Note that filebeat and logstash may not work correctly with self-signed certific
 
 Set this to `"true"` to allow the use of self-signed certificates (when a CA isn't available).
 
+For environments with centralised package management (such as Spacewalk)  set filebeat_use_own_repo:  "True" to disable adding the ElasticSearch repo. 
+
 ## Dependencies
 
 None.
