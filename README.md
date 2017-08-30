@@ -44,12 +44,13 @@ Filebeat logging.
 
     filebeat_ssl_dir: /etc/pki/logstash
 
-The path where certificates and keyfiles will be stored.
+The path where CA, certificates and keyfiles will be stored.
 
+    filebeat_ssl_certificate_authority: ""
     filebeat_ssl_certificate_file: ""
     filebeat_ssl_key_file: ""
 
-Local paths to the SSL certificate and key files, which will be copied into the `filebeat_ssl_dir`.
+Local paths to the CA, SSL certificate and key files, which will be copied into the `filebeat_ssl_dir`.
 
 For utmost security, you should use your own valid certificate and keyfile, and update the `filebeat_ssl_*` variables in your playbook to use your certificate.
 

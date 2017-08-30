@@ -22,5 +22,6 @@
   with_items:
     - "{{ filebeat_ssl_key_file }}"
     - "{{ filebeat_ssl_certificate_file }}"
+    - "{{ filebeat_ssl_certificate_authority }}"
   notify: restart filebeat
   when: filebeat_ssl_key_file and filebeat_ssl_certificate_file
