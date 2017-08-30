@@ -52,6 +52,10 @@ The path where CA, certificates and keyfiles will be stored.
 
 Local paths to the CA, SSL certificate and key files, which will be copied into the `filebeat_ssl_dir`.
 
+    filebeat_ssl: true
+
+Finally, turn on ssl for filebeat.
+
 For utmost security, you should use your own valid certificate and keyfile, and update the `filebeat_ssl_*` variables in your playbook to use your certificate.
 
 To generate a self-signed certificate/key pair, you can use use the command:

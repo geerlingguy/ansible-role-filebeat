@@ -56,7 +56,7 @@ output:
     # Elasticsearch. The default is 15 seconds.
     #topology_expire: 15
 
-{% if filebeat_ssl_certificate_file and filebeat_ssl_key_file %}
+{% if filebeat_ssl %}
     # tls configuration. By default is off.
     tls:
       # List of root certificates for HTTPS server verifications
@@ -105,7 +105,7 @@ output:
     # top topbeat and for Filebeat to filebeat.
     #index: filebeat
 
-{% if filebeat_ssl_certificate_file and filebeat_ssl_key_file %}
+{% if filebeat_ssl %}
     # Optional TLS. By default is off.
     tls:
       # List of root certificates for HTTPS server verifications
