@@ -27,11 +27,14 @@ Prospectors that will be listed in the `prospectors` section of the Filebeat con
     filebeat_output_elasticsearch_hosts:
       - "localhost:9200"
 
-Whether to enable Elasticsearch output, and which hosts to send output to.
+Whether to enable Elasticsearch output, which hosts to send output to, and optional index, template path.
 
     filebeat_output_logstash_enabled: true
     filebeat_output_logstash_hosts:
       - "localhost:5000"
+    filebeat_output_logstash_index: ""
+    filebeat_output_logstash_template_enabled: false
+    filebeat_output_logstash_template_path: ""
 
 Whether to enable Logstash output, and which hosts to send output to.
 
