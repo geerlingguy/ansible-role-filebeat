@@ -109,7 +109,9 @@ output:
     # Optional TLS. By default is off.
     tls:
       # List of root certificates for HTTPS server verifications
-      certificate_authorities: {{ filebeat_ssl_ca }}
+      {% if filebeat_ssl_ca %}
+        certificate_authorities: {{ filebeat_ssl_ca | to_json}}
+      {% endif %}
 
       # Certificate for TLS client authentication
       certificate: "{{ filebeat_ssl_dir }}/{{ filebeat_ssl_certificate_file | basename }}"

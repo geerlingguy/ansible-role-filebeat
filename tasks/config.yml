@@ -24,3 +24,12 @@
     - "{{ filebeat_ssl_certificate_file }}"
   notify: restart filebeat
   when: filebeat_ssl_key_file and filebeat_ssl_certificate_file
+
+- name: Copy CA.
+  copy:
+    src: "{{ item }}"
+    dest: "{{ filebeat_ssl_dir }}/{{ item | basename }}"
+    mode: 0644
+  with_items: "{{ filebeat_ssl_ca }}"
+  notify: restart filebeat
+  when: filebeat_ssl_ca
