@@ -63,6 +63,10 @@ Note that filebeat and logstash may not work correctly with self-signed certific
 
 Set this to `"true"` to allow the use of self-signed certificates (when a CA isn't available).
 
+    filebeat_ssl_ca: ["/etc/pki/root/ca.pem"]
+
+Configures Filebeat to trust any certificates signed by the specified CA. Please refer to [Secure communication with Logstash by using SSL]( https://www.elastic.co/guide/en/beats/filebeat/current/configuring-ssl-logstash.html#configuring-ssl-logstash) for more details.
+
 ## Dependencies
 
 None.
