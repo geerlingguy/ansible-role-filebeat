@@ -60,7 +60,7 @@ output:
     # tls configuration. By default is off.
     tls:
       # List of root certificates for HTTPS server verifications
-      #certificate_authorities: ["/etc/pki/root/ca.pem"]
+      certificate_authorities: {{ filebeat_certificate_authorities }} 
 
       # Certificate for TLS client authentication
       certificate: "{{ filebeat_ssl_dir }}/{{ filebeat_ssl_certificate_file | basename }}"
@@ -109,7 +109,7 @@ output:
     # Optional TLS. By default is off.
     tls:
       # List of root certificates for HTTPS server verifications
-      #certificate_authorities: ["/etc/pki/root/ca.pem"]
+      certificate_authorities: {{ filebeat_certificate_authorities }} 
 
       # Certificate for TLS client authentication
       certificate: "{{ filebeat_ssl_dir }}/{{ filebeat_ssl_certificate_file | basename }}"
