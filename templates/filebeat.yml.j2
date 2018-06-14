@@ -94,7 +94,7 @@ output:
     ssl.enabled: {{ filebeat_ssl_enabled }}
 {% endif %}
 {% if filebeat_ssl_certificate_authorities %}
-    ssl.certificate_authorities: {{ filebeat_ssl_certificate_authorities }}
+    ssl.certificate_authorities: {{ filebeat_ssl_certificate_authorities | to_json }}
 {% endif %}
 {% if filebeat_ssl_certificate_file and filebeat_ssl_key_file %}
     # Certificate for TLS client authentication
@@ -109,14 +109,14 @@ output:
     ssl.verification_mode: {{ filebeat_ssl_verification_mode }}
 {% endif %}
 {% if filebeat_ssl_cipher_suites %}
-    ssl.cipher_suites: {{ filebeat_ssl_cipher_suites }}
+    ssl.cipher_suites: {{ filebeat_ssl_cipher_suites | to_json }}
 {% endif %}
 {% if filebeat_ssl_curve_types %}
     # Configure curve types for ECDHE based cipher suites
-    ssl.curve_types: {{ filebeat_ssl_curve_types }}
+    ssl.curve_types: {{ filebeat_ssl_curve_types | to_json }}
 {% endif %}
 {% if filebeat_ssl_supported_protocols %}
-    ssl.supported_protocols: {{ filebeat_ssl_supported_protocols }}
+    ssl.supported_protocols: {{ filebeat_ssl_supported_protocols | to_json}}
 {% endif %}
 {% endif %}
 
