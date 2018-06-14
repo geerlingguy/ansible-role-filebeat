@@ -1,13 +1,11 @@
 ---
 - name: Copy Filebeat configuration.
   template:
-    src: templates/filebeat.yml.j2
+    src: filebeat.yml.j2
     dest: "/etc/filebeat/filebeat.yml"
     owner: root
     group: root
     mode: 0644
-    backup: yes
-    force: yes
   notify: restart filebeat
 
 - name: Ensure Filebeat SSL key pair directory exists.

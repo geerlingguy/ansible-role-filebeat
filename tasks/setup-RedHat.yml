@@ -1,10 +1,10 @@
 ---
-- name: Add Elasticsearch GPG key.
+- name: Add Elasticsearch GPG key (RH).
   rpm_key:
     key: https://packages.elastic.co/GPG-KEY-elasticsearch
     state: present
 
-- name: Add Filebeat repository.
+- name: Add Filebeat repository (RH).
   template:
     src: beats.repo.j2
     dest: /etc/yum.repos.d/beats.repo
