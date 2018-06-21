@@ -1,3 +1,28 @@
+# Modified Filebeat Role, forked from Jeff Geerling
+
+
+## Updated for Filebeat 6.x
+
+## Created a Windows branch
+
+## Added fine tuning for SSL for a generated filebeat.yml file.
+
+## Added following SSL options for the generated filebeat.yml file, for which there are no defaults provided:
+
+    filebeat_ssl_certificate_authorities: #Collection
+    filebeat_ssl_verification_mode: # none, full
+    filebeat_ssl_renegotiation: #never, once, freely
+    filebeat_ssl_key_passphrase:
+    filebeat_ssl_supported_protocols: #Collection: [SSLv3, TLSv1, TLSv1.0, TLSv1.1, TLSv1.2]
+    filebeat_ssl_cipher_suites: #Collection - See docs for available types
+    filebeat_ssl_curve_types: #Collection - [P-256, P-384, P521]
+    filebeat_ssl_enabled: # true, false
+
+
+# Original README:
+
+
+
 # Ansible Role: Filebeat for ELK Stack
 
 [![Build Status](https://travis-ci.org/geerlingguy/ansible-role-filebeat.svg?branch=master)](https://travis-ci.org/geerlingguy/ansible-role-filebeat)
