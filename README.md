@@ -74,7 +74,6 @@ It's possible for you to define your own index name, but if you do, you'll have 
     filebeat_elasticsearch_index_name: "filebeat"
     filebeat_custom_template_enabled: "true"
     filebeat_custom_template_name: "custom-template" 
-    filebeat_custom_template_pattern: ""
     filebeat_custom_template_pattern: "custom-template-%{[beat.version]}-*"
 
 ## Dependencies
