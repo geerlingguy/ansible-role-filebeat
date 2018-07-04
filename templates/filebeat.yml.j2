@@ -3,6 +3,13 @@ filebeat:
   prospectors:
     {{ filebeat_prospectors | to_json }}
 
+{% if filebeat_custom_template_enabled %}
+setup.template.enabled: true
+setup.template.overwrite: true
+setup.template.name: {{ filebeat_custom_template_name }}
+setup.template.pattern: {{ filebeat_custom_template_pattern }}
+{% endif %}
+
 # Configure what outputs to use when sending the data collected by the beat.
 # Multiple outputs may be used.
 output:
@@ -13,17 +20,20 @@ output:
     # Array of hosts to connect to.
     hosts: {{ filebeat_output_elasticsearch_hosts | to_json }}
 
-    # Optional protocol and basic auth credentials. These are deprecated.
-    #protocol: "https"
-    #username: "admin"
-    #password: "s3cr3t"
+    # HTTPS basic auth
+    {% if filebeat_basic_auth_enabled %}
+
+    protocol: "https"
+    username: "{{ filebeat_elasticsearch_username }}"
+    password: "{{ filebeat_elasticsearch_password }}"
+    {% endif %}
 
     # Number of workers per Elasticsearch host.
     #worker: 1
 
     # Optional index name. The default is "filebeat" and generates
     # [filebeat-]YYYY.MM.DD keys.
-    #index: "filebeat"
+    index: "{{ filebeat_elasticsearch_index_name }}"
 
     # Optional HTTP Path
     #path: "/elasticsearch"

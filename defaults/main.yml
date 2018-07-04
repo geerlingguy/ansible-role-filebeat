@@ -10,6 +10,16 @@ filebeat_output_elasticsearch_enabled: false
 filebeat_output_elasticsearch_hosts:
   - "localhost:9200"
 
+filebeat_basic_auth_enabled: false
+filebeat_elasticsearch_username: ''
+filebeat_elasticsearch_password: ''
+
+filebeat_elasticsearch_index_name: filebeat
+
+filebeat_custom_template_enabled: true
+filebeat_custom_template_name: ''
+filebeat_custom_template_pattern: ''
+
 filebeat_output_logstash_enabled: true
 filebeat_output_logstash_hosts:
   - "localhost:5044"

@@ -63,6 +63,20 @@ Note that filebeat and logstash may not work correctly with self-signed certific
 
 Set this to `"true"` to allow the use of self-signed certificates (when a CA isn't available).
 
+It's possible to include the usage of basic HTTP authentication too:
+
+    filebeat_basic_auth_enabled: "true"
+    filebeat_elasticsearch_username: "username"
+    filebeat_elasticsearch_password: "password"
+
+It's possible for you to define your own index name, but if you do, you'll have to create a specific template around it otherwise filebeat will not start. This is done via a template and will use HTTPS as the protocol. You can configure this via variables.
+
+    filebeat_elasticsearch_index_name: "filebeat"
+    filebeat_custom_template_enabled: "true"
+    filebeat_custom_template_name: "custom-template" 
+    filebeat_custom_template_pattern: ""
+    filebeat_custom_template_pattern: "custom-template-%{[beat.version]}-*"
+
 ## Dependencies
 
 None.
