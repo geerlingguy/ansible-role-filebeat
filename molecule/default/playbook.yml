@@ -1,9 +1,11 @@
 ---
-- hosts: all
+- name: Converge
+  hosts: all
+  become: true
 
   pre_tasks:
     - name: Update apt cache.
-      apt: update_cache=yes cache_valid_time=600
+      apt: update_cache=true cache_valid_time=600
       when: ansible_os_family == 'Debian'
 
     - name: Install test dependencies (RedHat).
@@ -14,7 +16,7 @@
       package: name=curl state=present
 
   roles:
-    - geerlingguy.java
-    - geerlingguy.elasticsearch
-    - geerlingguy.logstash
-    - role_under_test
+    - role: geerlingguy.java
+    - role: geerlingguy.elasticsearch
+    - role: geerlingguy.logstash
+    - role: geerlingguy.filebeat
