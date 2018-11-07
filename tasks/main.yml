@@ -9,13 +9,13 @@
   package:
     name: "filebeat-{{ version_filebeat }}"
     state: present
-  when: not( (version_filebeat is undefined) or (version_filebeat is none) or (version_vilebeat | trim == '') )
+  when: not( (version_filebeat is undefined) or (version_filebeat is none) or (version_filebeat | trim == '') )
 
 - name: Install latest Filebeat
   package:
     name: filebeat
     state: present
-  when: (version_filebeat is undefined) or (version_filebeat is none) or (version_vilebeat | trim == '')
+  when: (version_filebeat is undefined) or (version_filebeat is none) or (version_filebeat | trim == '')
 
 - include: config.yml
   when: filebeat_create_config
