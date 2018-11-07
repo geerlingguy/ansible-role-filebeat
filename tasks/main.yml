@@ -5,8 +5,17 @@
 - include: setup-Debian.yml
   when: ansible_os_family == 'Debian'
 
-- name: Install Filebeat.
-  package: name=filebeat state=present
+- name: "Install Filebeat {{ version_filebeat }}"
+  package:
+    name: "filebeat-{{ version_filebeat }}"
+    state: present
+  when: not( (version_filebeat is undefined) or (version_filebeat is none) or (version_vilebeat | trim == '') )
+
+- name: Install latest Filebeat
+  package:
+    name: filebeat
+    state: present
+  when: (version_filebeat is undefined) or (version_filebeat is none) or (version_vilebeat | trim == '')
 
 - include: config.yml
   when: filebeat_create_config
