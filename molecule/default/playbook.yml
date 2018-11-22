@@ -15,6 +15,12 @@
     - name: Install test dependencies.
       package: name=curl state=present
 
+    - name: Set the java_packages variable (Ubuntu).
+      set_fact:
+        java_packages:
+          - openjdk-8-jdk
+      when: ansible_distribution == 'Ubuntu'
+
   roles:
     - role: geerlingguy.java
     - role: geerlingguy.elasticsearch
