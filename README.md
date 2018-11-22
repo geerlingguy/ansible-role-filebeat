@@ -12,6 +12,10 @@ None.
 
 Available variables are listed below, along with default values (see `defaults/main.yml`):
 
+    filebeat_version: 6.x
+
+Controls the major version of Filebeat which is installed.
+
     filebeat_create_config: true
 
 Whether to create the Filebeat configuration file and handle the copying of SSL key and cert for filebeat. If you prefer to create a configuration file yourself you can set this to `false`.
