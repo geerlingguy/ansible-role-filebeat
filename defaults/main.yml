@@ -24,3 +24,5 @@ filebeat_ssl_dir: /etc/pki/logstash
 filebeat_ssl_certificate_file: ""
 filebeat_ssl_key_file: ""
 filebeat_ssl_insecure: "false"
+
+filebeat_apt_keyid: 46095ACC8548582C1A2699A9D27D666CD88E42B4
