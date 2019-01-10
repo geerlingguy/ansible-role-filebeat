@@ -14,7 +14,7 @@ Available variables are listed below, along with default values (see `defaults/m
 
     filebeat_version: 6.x
 
-Controls the major version of Filebeat which is installed.
+Controls the major version of Filebeat which is installed. Must be in the format `5.x`, `6.x`, etc.
 
     filebeat_create_config: true
 
