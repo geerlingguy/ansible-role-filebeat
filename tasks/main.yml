@@ -1,18 +1,26 @@
 ---
 - include: setup-RedHat.yml
-  when: ansible_os_family == 'RedHat'
+  when: 
+    - ansible_os_family == 'RedHat'
+    - ansible_architecture == "x86_64" or ansible_architecture == "i386" or ansible_architecture == "i686"
 
 - include: setup-Debian.yml
-  when: ansible_os_family == 'Debian'
+  when: 
+    - ansible_os_family == 'Debian'
+    - ansible_architecture == "x86_64" or ansible_architecture == "i386" or ansible_architecture == "i686"
 
 - name: Install Filebeat.
   package: name=filebeat state=present
+  when: ansible_architecture == "x86_64" or ansible_architecture == "i386" or ansible_architecture == "i686"
 
 - include: config.yml
-  when: filebeat_create_config
+  when: 
+    - filebeat_create_config
+    - ansible_architecture == "x86_64" or ansible_architecture == "i386" or ansible_architecture == "i686"
 
 - name: Ensure Filebeat is started and enabled at boot.
   service:
     name: filebeat
     state: started
     enabled: true
+  when: ansible_architecture == "x86_64" or ansible_architecture == "i386" or ansible_architecture == "i686"
