@@ -1,11 +1,11 @@
 ---
 - include: setup-RedHat.yml
-  when: 
+  when:
     - ansible_os_family == 'RedHat'
     - ansible_architecture == "x86_64" or ansible_architecture == "i386" or ansible_architecture == "i686"
 
 - include: setup-Debian.yml
-  when: 
+  when:
     - ansible_os_family == 'Debian'
     - ansible_architecture == "x86_64" or ansible_architecture == "i386" or ansible_architecture == "i686"
 
@@ -14,7 +14,7 @@
   when: ansible_architecture == "x86_64" or ansible_architecture == "i386" or ansible_architecture == "i686"
 
 - include: config.yml
-  when: 
+  when:
     - filebeat_create_config
     - ansible_architecture == "x86_64" or ansible_architecture == "i386" or ansible_architecture == "i686"
 
