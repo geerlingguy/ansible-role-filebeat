@@ -67,7 +67,15 @@ Prospectors that will be listed in the `prospectors` section of the Filebeat con
           - "/var/log/*.log"
 
 
-In 7.x versions,  `prospectors` are replaced by inputs and modules. The `inputs` are equivalent to the `prospectors` (See [Filebeat Inputs documentation](https://www.elastic.co/guide/en/beats/filebeat/master/configuration-filebeat-options.html)), however the `modules` are introduced in this version with the aim of simplifying the configuration of logs of the most common services (Sylog, Authlog, Nginx, Apache, MySQL, etc). With the variables show above, you can enable and disable the most common Filebeat Modules with default configuration. For more options explore [Filebeat Modules documentation](https://www.elastic.co/guide/en/beats/filebeat/current/filebeat-modules.html).
+In 7.x versions,  `prospectors` are replaced by inputs and modules. The 
+`inputs` are equivalent to the `prospectors` (See [Filebeat Inputs 
+documentation](https://www.elastic.co/guide/en/beats/filebeat/master/configuration-filebeat-options.html)), 
+however the `modules` are introduced in this role version with the aim 
+of simplifying the configuration of logs of the most common services 
+(Sylog, Authlog, Nginx, Apache, MySQL, etc). With the variables show 
+above, you can enable and disable the most common Filebeat Modules with 
+default configuration. For more options explore [Filebeat Modules 
+documentation](https://www.elastic.co/guide/en/beats/filebeat/current/filebeat-modules.html).
 
 ### Output vars
 
