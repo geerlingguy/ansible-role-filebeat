@@ -12,13 +12,17 @@ None.
 
 Available variables are listed below, along with default values (see `defaults/main.yml`):
 
-    filebeat_version: 6.x
+    filebeat_version: 7.x
+
+Supported 6.x and 7.x versions.
 
 Controls the major version of Filebeat which is installed.
 
     filebeat_create_config: true
 
 Whether to create the Filebeat configuration file and handle the copying of SSL key and cert for filebeat. If you prefer to create a configuration file yourself you can set this to `false`.
+
+### Version 6.x - Prospectors
 
     filebeat_prospectors:
       - input_type: log
@@ -27,7 +31,47 @@ Whether to create the Filebeat configuration file and handle the copying of SSL 
 
 Prospectors that will be listed in the `prospectors` section of the Filebeat configuration. Read through the [Filebeat Prospectors configuration guide](https://www.elastic.co/guide/en/beats/filebeat/current/configuration-filebeat-options.html) for more options.
 
-    filebeat_output_elasticsearch_enabled: false
+
+### Version 7.x - Inputs and/or modules
+
+    filebeat_modules_enabled: true
+    filebeat_modules_path: ${path.config}/modules.d/*.yml
+
+    filebeat_system_log_enabled: true
+    filebeat_apache_log_enabled: false
+    filebeat_audit_log_enabled: false
+    filebeat_elasticsearch_log_enabled: false
+    filebeat_haproxy_log_enabled: false
+    filebeat_icinga_log_enabled: false
+    filebeat_iss_log_enabled: false
+    filebeat_iptables_log_enabled: false
+    filebeat_kafka_log_enabled: false
+    filebeat_kibana_log_enabled: false
+    filebeat_logstash_log_enabled: false
+    filebeat_mongodb_log_enabled: false
+    filebeat_mysql_log_enabled: false
+    filebeat_nginx_log_enabled: false
+    filebeat_osquery_log_enabled: false
+    filebeat_postgresql_log_enabled: false
+    filebeat_redis_log_enabled: false
+    filebeat_googlesanta_log_enabled: false
+    filebeat_suricata_log_enabled: false
+    filebeat_traefik_log_enabled: false
+    filebeat_zeek_log_enabled: false
+
+    # Filebeat inputs
+    filebeat_inputs_enabled: false
+    filebeat_inputs:
+      - type: log
+        paths:
+          - "/var/log/*.log"
+
+
+In 7.x versions,  `prospectors` are replaced by inputs and modules. The `inputs` are equivalent to the `prospectors` (See [Filebeat Inputs documentation](https://www.elastic.co/guide/en/beats/filebeat/master/configuration-filebeat-options.html)), however the `modules` are introduced in this version with the aim of simplifying the configuration of logs of the most common services (Sylog, Authlog, Nginx, Apache, MySQL, etc). With the variables show above, you can enable and disable the most common Filebeat Modules with default configuration. For more options explore [Filebeat Modules documentation](https://www.elastic.co/guide/en/beats/filebeat/current/filebeat-modules.html).
+
+### Output vars
+
+    filebeat_output_elasticsearch_enabled: true
     filebeat_output_elasticsearch_hosts:
       - "localhost:9200"
 
@@ -39,12 +83,38 @@ Whether to enable Elasticsearch output, and which hosts to send output to.
 
 Whether to enable Logstash output, and which hosts to send output to.
 
-    filebeat_enable_logging: false 
+    filebeat_output_kafka_enabled: true
+    filebeat_output_kafka_hosts:
+    - "localhost:9092"
+
+Whether to enable Kafka output, and which hosts to send output to.
+
+    filebeat_output_redis_enabled: true
+    filebeat_output_redis_hosts:
+      - "localhost:6379"
+
+Whether to enable Redis output, and which hosts to send output to.
+
+    filebeat_output_file_enabled: true
+    filebeat_output_file_path: /tmp/filebeat
+    filebeat_output_file_filename: filebeat
+
+Whether to enable File output, and which hosts to send output to.
+
+    filebeat_output_console_enabled: true
+
+Whether to enable Console output, and which hosts to send output to.
+
+### Logging vars
+
+    filebeat_enable_logging: false
     filebeat_log_level: warning
     filebeat_log_dir: /var/log/filebeat
     filebeat_log_filename: filebeat.log
 
-Filebeat logging.
+For configure Filebeat logging.
+
+### SSL vars
 
     filebeat_ssl_dir: /etc/pki/logstash
 
