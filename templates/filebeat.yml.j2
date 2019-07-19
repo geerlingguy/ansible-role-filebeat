@@ -56,17 +56,31 @@ output:
     # Elasticsearch. The default is 15 seconds.
     #topology_expire: 15
 
-{% if filebeat_ssl_certificate_file and filebeat_ssl_key_file %}
+{% if filebeat_ssl_enabled %}
     # tls configuration. By default is off.
-    tls:
+    ssl:
+      enabled: true
+
       # List of root certificates for HTTPS server verifications
+{% if filebeat_cafile.stat.exists|bool and filebeat_cafile.stat.isreg|bool %}
+      certificate_authorities: "{{ filebeat_ssl_dir }}/{{ filebeat_ssl_certificate_authority | basename }}"
+{% else %}
       #certificate_authorities: ["/etc/pki/root/ca.pem"]
+{% endif %}
 
       # Certificate for TLS client authentication
+{% if filebeat_crtfile.stat.exists|bool and filebeat_crtfile.stat.isreg|bool %}
       certificate: "{{ filebeat_ssl_dir }}/{{ filebeat_ssl_certificate_file | basename }}"
+{% else %}
+      #certificate: "/etc/pki/root/client.crt"
+{% endif %}
 
       # Client Certificate Key
+{% if filebeat_keyfile.stat.exists|bool and filebeat_keyfile.stat.isreg|bool %}
       certificate_key: "{{ filebeat_ssl_dir }}/{{ filebeat_ssl_key_file | basename}}"
+{% else %}
+      #certificate_key: "/etc/pki/root/client.key"
+{% endif %}
 
       # Controls whether the client verifies server certificates and host name.
       # If insecure is set to true, all server host names and certificates will be
@@ -105,23 +119,36 @@ output:
     # top topbeat and for Filebeat to filebeat.
     #index: filebeat
 
-{% if filebeat_ssl_certificate_file and filebeat_ssl_key_file %}
+{% if filebeat_ssl_enabled %}
     # Optional TLS. By default is off.
-    tls:
+    ssl:
+      enabled: true
+
       # List of root certificates for HTTPS server verifications
+{% if filebeat_cafile.stat.exists|bool and filebeat_cafile.stat.isreg|bool %}
+      certificate_authorities: "{{ filebeat_ssl_dir }}/{{ filebeat_ssl_certificate_authority | basename }}"
+{% else %}
       #certificate_authorities: ["/etc/pki/root/ca.pem"]
+{% endif %}
 
       # Certificate for TLS client authentication
+{% if filebeat_crtfile.stat.exists|bool and filebeat_crtfile.stat.isreg|bool %}
       certificate: "{{ filebeat_ssl_dir }}/{{ filebeat_ssl_certificate_file | basename }}"
+{% else %}
+      #certificate: "/etc/pki/root/client.crt"
+{% endif %}
 
       # Client Certificate Key
+{% if filebeat_keyfile.stat.exists|bool and filebeat_keyfile.stat.isreg|bool %}
       certificate_key: "{{ filebeat_ssl_dir }}/{{ filebeat_ssl_key_file | basename}}"
+{% else %}
+      #certificate_key: "/etc/pki/root/client.key"
+{% endif %}
 
       # Controls whether the client verifies server certificates and host name.
       # If insecure is set to true, all server host names and certificates will be
       # accepted. In this mode TLS based connections are susceptible to
       # man-in-the-middle attacks. Use only for testing.
-      #insecure: true
       insecure: {{ filebeat_ssl_insecure }}
 
       # Configure cipher suites to be used for TLS connections
@@ -129,6 +156,7 @@ output:
 
       # Configure curve types for ECDHE based cipher suites
       #curve_types: []
+{% endif %}
 {% endif %}
 
 {% if filebeat_enable_logging %}
@@ -146,5 +174,4 @@ logging:
     path: {{ filebeat_log_dir }}
     name: {{ filebeat_log_filename }}
     keepfiles: 7
-{% endif %}
 {% endif %}

@@ -1,4 +1,13 @@
 ---
+- local_action: stat path="{{ role_path }}/files/{{ filebeat_ssl_key_file }}"
+  register: filebeat_keyfile
+
+- local_action: stat path="{{ role_path }}/files/{{ filebeat_ssl_certificate_file }}"
+  register: filebeat_crtfile
+
+- local_action: stat path="{{ role_path }}/files/{{ filebeat_ssl_certificate_authority }}"
+  register: filebeat_cafile
+
 - name: Copy Filebeat configuration.
   template:
     src: filebeat.yml.j2
@@ -12,17 +21,33 @@
   file:
     path: "{{ filebeat_ssl_dir }}"
     state: directory
-  when: filebeat_ssl_key_file | bool
+    owner: "root"
+    mode: 0700
+  when: (filebeat_keyfile.stat.exists|bool and filebeat_keyfile.stat.isreg|bool) or (filebeat_crtfile.stat.exists|bool and filebeat_crtfile.stat.isreg|bool) or (filebeat_cafile.stat.exists|bool and filebeat_cafile.stat.isreg|bool)
 
-- name: Copy SSL key and cert for filebeat.
+- name: Upload client SSL key
   copy:
-    src: "{{ item }}"
-    dest: "{{ filebeat_ssl_dir }}/{{ item | basename }}"
-    mode: 0644
-  with_items:
-    - "{{ filebeat_ssl_key_file }}"
-    - "{{ filebeat_ssl_certificate_file }}"
+    src: "{{ filebeat_ssl_key_file }}"
+    dest: "{{ filebeat_ssl_dir }}/{{ filebeat_ssl_key_file | basename }}"
+    mode: 0600
+    owner: "root"
+  when: filebeat_keyfile.stat.exists|bool and filebeat_keyfile.stat.isreg|bool
   notify: restart filebeat
-  when:
-    - filebeat_ssl_key_file | bool
-    - filebeat_ssl_certificate_file | bool
+
+- name: Upload client SSL certificate
+  copy:
+    src: "{{ filebeat_ssl_certificate_file }}"
+    dest: "{{ filebeat_ssl_dir }}/{{ filebeat_ssl_certificate_file | basename }}"
+    mode: 0600
+    owner: "root"
+  when: filebeat_crtfile.stat.exists|bool and filebeat_crtfile.stat.isreg|bool
+  notify: restart filebeat
+
+- name: Upload local certificate authority file
+  copy:
+    src: "{{ filebeat_ssl_certificate_authority }}"
+    dest: "{{ filebeat_ssl_dir }}/{{ filebeat_ssl_certificate_authority | basename }}"
+    mode: 0600
+    owner: "root"
+  notify: restart filebeat
+  when: filebeat_cafile.stat.exists|bool and filebeat_cafile.stat.isreg|bool
