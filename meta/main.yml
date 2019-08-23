@@ -2,7 +2,7 @@
 dependencies: []
 
 galaxy_info:
-  role_name: role-filebeat
+  role_name: filebeat
   author: geerlingguy
   description: Filebeat for Linux.
   company: "Midwestern Mac, LLC"
