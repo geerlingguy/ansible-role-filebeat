@@ -39,11 +39,9 @@ filebeat_log_filename: mybeat.log
 filebeat_ssl_dir: /etc/pki/logstash
 filebeat_ssl_certificate_file: ""
 filebeat_ssl_key_file: ""
-<<<<<<< HEAD
 filebeat_ssl_insecure: "false"
 
 filebeat_apt_keyid: 46095ACC8548582C1A2699A9D27D666CD88E42B4
-=======
 filebeat_ssl_verification_mode: full
 
 # Only for Filebeat < 7.x
@@ -85,4 +83,3 @@ filebeat_inputs:
   - type: log
     paths:
       - "/var/log/*.log"
->>>>>>> 49bf697e7f429c7e4166ec726464d4b671fb5efa

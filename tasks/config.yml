@@ -12,11 +12,7 @@
   file:
     path: "{{ filebeat_ssl_dir }}"
     state: directory
-<<<<<<< HEAD
-  when: filebeat_ssl_key_file | bool
-=======
   when: filebeat_ssl_key_file | length > 0
->>>>>>> 49bf697e7f429c7e4166ec726464d4b671fb5efa
 
 - name: Copy SSL key and cert for filebeat.
   copy:
