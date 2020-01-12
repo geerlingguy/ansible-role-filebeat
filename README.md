@@ -12,7 +12,7 @@ None.
 
 Available variables are listed below, along with default values (see `defaults/main.yml`):
 
-    filebeat_version: 6.x
+    filebeat_version: 7.x
 
 Controls the major version of Filebeat which is installed.
 
@@ -21,7 +21,7 @@ Controls the major version of Filebeat which is installed.
 Whether to create the Filebeat configuration file and handle the copying of SSL key and cert for filebeat. If you prefer to create a configuration file yourself you can set this to `false`.
 
     filebeat_inputs:
-      - input_type: log
+      - type: log
         paths:
           - "/var/log/*.log"
 
@@ -39,7 +39,7 @@ Whether to enable Elasticsearch output, and which hosts to send output to.
 
 Whether to enable Logstash output, and which hosts to send output to.
 
-    filebeat_enable_logging: false 
+    filebeat_enable_logging: false
     filebeat_log_level: warning
     filebeat_log_dir: /var/log/filebeat
     filebeat_log_filename: filebeat.log
@@ -74,6 +74,13 @@ None.
 ## Example Playbook
 
     - hosts: logs
+    
+    - name: Set the java_packages variable (Debian/Ubuntu).
+      set_fact:
+        java_packages:
+          - openjdk-8-jdk
+      when: ansible_os_family == 'Debian'
+    
       roles:
         - geerlingguy.java
         - geerlingguy.elasticsearch
