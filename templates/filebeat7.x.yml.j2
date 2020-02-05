@@ -478,7 +478,7 @@ filebeat.inputs:
 # Possible options are:
 # * log: Reads every line of the log file (default)
 # * stdin: Reads the standard in
-{{ filebeat_inputs | to_nice_json }}
+{{ filebeat_inputs | to_nice_yaml(width=1337) }}
 #------------------------------ Log input --------------------------------
 #- type: log
 
