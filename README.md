@@ -14,22 +14,18 @@ Available variables are listed below, along with default values (see `defaults/m
 
     filebeat_version: 7.x
 
-Supported 6.x and 7.x versions.
-
 Controls the major version of Filebeat which is installed.
 
     filebeat_create_config: true
 
 Whether to create the Filebeat configuration file and handle the copying of SSL key and cert for filebeat. If you prefer to create a configuration file yourself you can set this to `false`.
 
-### Version 6.x - Prospectors
-
-    filebeat_prospectors:
-      - input_type: log
+    filebeat_inputs:
+      - type: log
         paths:
           - "/var/log/*.log"
 
-Prospectors that will be listed in the `prospectors` section of the Filebeat configuration. Read through the [Filebeat Prospectors configuration guide](https://www.elastic.co/guide/en/beats/filebeat/current/configuration-filebeat-options.html) for more options.
+Inputs that will be listed in the `inputs` section of the Filebeat configuration. Read through the [Filebeat Inputs configuration guide](https://www.elastic.co/guide/en/beats/filebeat/current/configuration-filebeat-options.html) for more options.
 
 
 ### Version 7.x - Inputs and/or modules
@@ -91,30 +87,6 @@ Whether to enable Elasticsearch output, and which hosts to send output to.
 
 Whether to enable Logstash output, and which hosts to send output to.
 
-    filebeat_output_kafka_enabled: true
-    filebeat_output_kafka_hosts:
-    - "localhost:9092"
-
-Whether to enable Kafka output, and which hosts to send output to.
-
-    filebeat_output_redis_enabled: true
-    filebeat_output_redis_hosts:
-      - "localhost:6379"
-
-Whether to enable Redis output, and which hosts to send output to.
-
-    filebeat_output_file_enabled: true
-    filebeat_output_file_path: /tmp/filebeat
-    filebeat_output_file_filename: filebeat
-
-Whether to enable File output, and which hosts to send output to.
-
-    filebeat_output_console_enabled: true
-
-Whether to enable Console output, and which hosts to send output to.
-
-### Logging vars
-
     filebeat_enable_logging: false
     filebeat_log_level: warning
     filebeat_log_dir: /var/log/filebeat
@@ -152,6 +124,13 @@ None.
 ## Example Playbook
 
     - hosts: logs
+    
+    - name: Set the java_packages variable (Debian/Ubuntu).
+      set_fact:
+        java_packages:
+          - openjdk-8-jdk
+      when: ansible_os_family == 'Debian'
+    
       roles:
         - geerlingguy.java
         - geerlingguy.elasticsearch

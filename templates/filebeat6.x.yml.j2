@@ -1,7 +1,7 @@
 filebeat:
-  # List of prospectors to fetch data.
-  prospectors:
-    {{ filebeat_prospectors | to_json }}
+  # List of inputs.
+  inputs:
+    {{ filebeat_inputs | to_json }}
 
 # Configure what outputs to use when sending the data collected by the beat.
 # Multiple outputs may be used.
@@ -57,16 +57,16 @@ output:
     #topology_expire: 15
 
 {% if filebeat_ssl_certificate_file and filebeat_ssl_key_file %}
-    # tls configuration. By default is off.
-    tls:
+    # ssl configuration. By default is off.
+    ssl:
       # List of root certificates for HTTPS server verifications
-      #certificate_authorities: ["/etc/pki/root/ca.pem"]
+      certificate_authorities: ["{{ filebeat_ssl_dir }}/{{ filebeat_ssl_certificate_file | basename }}"]
 
       # Certificate for TLS client authentication
       certificate: "{{ filebeat_ssl_dir }}/{{ filebeat_ssl_certificate_file | basename }}"
 
       # Client Certificate Key
-      certificate_key: "{{ filebeat_ssl_dir }}/{{ filebeat_ssl_key_file | basename}}"
+      key: "{{ filebeat_ssl_dir }}/{{ filebeat_ssl_key_file | basename}}"
 
       # Controls whether the client verifies server certificates and host name.
       # If insecure is set to true, all server host names and certificates will be
@@ -106,22 +106,21 @@ output:
     #index: filebeat
 
 {% if filebeat_ssl_certificate_file and filebeat_ssl_key_file %}
-    # Optional TLS. By default is off.
-    tls:
+    # ssl configuration. By default is off.
+    ssl:
       # List of root certificates for HTTPS server verifications
-      #certificate_authorities: ["/etc/pki/root/ca.pem"]
+      certificate_authorities: ["{{ filebeat_ssl_dir }}/{{ filebeat_ssl_certificate_file | basename }}"]
 
       # Certificate for TLS client authentication
       certificate: "{{ filebeat_ssl_dir }}/{{ filebeat_ssl_certificate_file | basename }}"
 
       # Client Certificate Key
-      certificate_key: "{{ filebeat_ssl_dir }}/{{ filebeat_ssl_key_file | basename}}"
+      key: "{{ filebeat_ssl_dir }}/{{ filebeat_ssl_key_file | basename}}"
 
       # Controls whether the client verifies server certificates and host name.
       # If insecure is set to true, all server host names and certificates will be
       # accepted. In this mode TLS based connections are susceptible to
       # man-in-the-middle attacks. Use only for testing.
-      #insecure: true
       insecure: {{ filebeat_ssl_insecure }}
 
       # Configure cipher suites to be used for TLS connections
