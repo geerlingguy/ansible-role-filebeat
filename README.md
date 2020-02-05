@@ -92,9 +92,7 @@ Whether to enable Logstash output, and which hosts to send output to.
     filebeat_log_dir: /var/log/filebeat
     filebeat_log_filename: filebeat.log
 
-For configure Filebeat logging.
-
-### SSL vars
+Filebeat logging.
 
     filebeat_ssl_dir: /etc/pki/logstash
 
