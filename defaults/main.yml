@@ -1,5 +1,5 @@
 ---
-filebeat_version: 7.x
+filebeat_version: 6.x
 filebeat_create_config: true
 
 filebeat_inputs:
@@ -24,3 +24,46 @@ filebeat_ssl_dir: /etc/pki/logstash
 filebeat_ssl_certificate_file: ""
 filebeat_ssl_key_file: ""
 filebeat_ssl_insecure: "false"
+
+filebeat_apt_keyid: 46095ACC8548582C1A2699A9D27D666CD88E42B4
+filebeat_ssl_verification_mode: full
+
+# Only for Filebeat < 7.x
+filebeat_prospectors:
+  - input_type: log
+    paths:
+      - "/var/log/*.log"
+
+# Only for Filebeat > 7.x
+# Filebeat modules
+filebeat_modules_enabled: true
+filebeat_modules_path: ${path.config}/modules.d/*.yml
+# Enabled filebeat modules
+filebeat_system_log_enabled: true
+filebeat_apache_log_enabled: false
+filebeat_audit_log_enabled: false
+filebeat_elasticsearch_log_enabled: false
+filebeat_haproxy_log_enabled: false
+filebeat_icinga_log_enabled: false
+filebeat_iss_log_enabled: false
+filebeat_iptables_log_enabled: false
+filebeat_kafka_log_enabled: false
+filebeat_kibana_log_enabled: false
+filebeat_logstash_log_enabled: false
+filebeat_mongodb_log_enabled: false
+filebeat_mysql_log_enabled: false
+filebeat_nginx_log_enabled: false
+filebeat_osquery_log_enabled: false
+filebeat_postgresql_log_enabled: false
+filebeat_redis_log_enabled: false
+filebeat_googlesanta_log_enabled: false
+filebeat_suricata_log_enabled: false
+filebeat_traefik_log_enabled: false
+filebeat_zeek_log_enabled: false
+
+# Filebeat inputs
+filebeat_inputs_enabled: false
+filebeat_inputs:
+  - type: log
+    paths:
+      - "/var/log/*.log"

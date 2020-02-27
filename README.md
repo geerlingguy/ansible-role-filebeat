@@ -27,7 +27,55 @@ Whether to create the Filebeat configuration file and handle the copying of SSL 
 
 Inputs that will be listed in the `inputs` section of the Filebeat configuration. Read through the [Filebeat Inputs configuration guide](https://www.elastic.co/guide/en/beats/filebeat/current/configuration-filebeat-options.html) for more options.
 
-    filebeat_output_elasticsearch_enabled: false
+
+### Version 7.x - Inputs and/or modules
+
+    filebeat_modules_enabled: true
+    filebeat_modules_path: ${path.config}/modules.d/*.yml
+
+    filebeat_system_log_enabled: true
+    filebeat_apache_log_enabled: false
+    filebeat_audit_log_enabled: false
+    filebeat_elasticsearch_log_enabled: false
+    filebeat_haproxy_log_enabled: false
+    filebeat_icinga_log_enabled: false
+    filebeat_iss_log_enabled: false
+    filebeat_iptables_log_enabled: false
+    filebeat_kafka_log_enabled: false
+    filebeat_kibana_log_enabled: false
+    filebeat_logstash_log_enabled: false
+    filebeat_mongodb_log_enabled: false
+    filebeat_mysql_log_enabled: false
+    filebeat_nginx_log_enabled: false
+    filebeat_osquery_log_enabled: false
+    filebeat_postgresql_log_enabled: false
+    filebeat_redis_log_enabled: false
+    filebeat_googlesanta_log_enabled: false
+    filebeat_suricata_log_enabled: false
+    filebeat_traefik_log_enabled: false
+    filebeat_zeek_log_enabled: false
+
+    # Filebeat inputs
+    filebeat_inputs_enabled: false
+    filebeat_inputs:
+      - type: log
+        paths:
+          - "/var/log/*.log"
+
+
+In 7.x versions,  `prospectors` are replaced by inputs and modules. The 
+`inputs` are equivalent to the `prospectors` (See [Filebeat Inputs 
+documentation](https://www.elastic.co/guide/en/beats/filebeat/master/configuration-filebeat-options.html)), 
+however the `modules` are introduced in this role version with the aim 
+of simplifying the configuration of logs of the most common services 
+(Sylog, Authlog, Nginx, Apache, MySQL, etc). With the variables show 
+above, you can enable and disable the most common Filebeat Modules with 
+default configuration. For more options explore [Filebeat Modules 
+documentation](https://www.elastic.co/guide/en/beats/filebeat/current/filebeat-modules.html).
+
+### Output vars
+
+    filebeat_output_elasticsearch_enabled: true
     filebeat_output_elasticsearch_hosts:
       - "localhost:9200"
 
