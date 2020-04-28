@@ -93,6 +93,12 @@ output:
   logstash:
     # The Logstash hosts
     hosts: {{ filebeat_output_logstash_hosts | to_json }}
+  {% if filebeat_output_logstash_username is defined %}
+    username: {{ filebeat_output_logstash_username }}
+  {% endif %}
+  {% if filebeat_output_logstash_password is defined %}
+    password: {{ filebeat_output_logstash_password }}
+  {% endif %}
 
     # Number of workers per Logstash host.
     #worker: 1
@@ -103,7 +109,10 @@ output:
     # Optional index name. The default index name depends on the each beat.
     # For Packetbeat, the default is set to packetbeat, for Topbeat
     # top topbeat and for Filebeat to filebeat.
-    #index: filebeat
+  {% if filebeat_output_logstash_index is defined %}
+    index: {{ filebeat_output_logstash_index }}
+  {% endif %}
+
 
 {% if filebeat_ssl_certificate_file and filebeat_ssl_key_file %}
     # ssl configuration. By default is off.
