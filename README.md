@@ -37,6 +37,13 @@ Whether to enable Elasticsearch output, and which hosts to send output to.
     filebeat_output_logstash_hosts:
       - "localhost:5000"
 
+In case you have credentials and add additional options
+
+    filebeat_output_logstash_opts:
+      index: "filebeat-${HOST}"
+      username: my_elastic_user
+      password: super_hard_secret
+
 Whether to enable Logstash output, and which hosts to send output to.
 
     filebeat_enable_logging: false

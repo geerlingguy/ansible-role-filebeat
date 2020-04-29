@@ -20,6 +20,7 @@ filebeat_log_level: warning
 filebeat_log_dir: /var/log/mybeat
 filebeat_log_filename: mybeat.log
 
+filebeat_config_path: /etc/filebeat/filebeat.yml
 filebeat_ssl_dir: /etc/pki/logstash
 filebeat_ssl_certificate_file: ""
 filebeat_ssl_key_file: ""
