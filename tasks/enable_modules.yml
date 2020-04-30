@@ -1,0 +1,8 @@
+---
+- name: Enable filebeat modules
+  shell:
+    cmd: filebeat modules enable {{item}}
+  with_items:
+    - nginx
+    - mysql
+    - iptables
