@@ -2,6 +2,7 @@
 filebeat_version: 7.x
 filebeat_create_config: true
 filebeat_enable_modules: false
+filebeat_modules: []
 
 filebeat_inputs:
   - type: log

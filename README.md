@@ -74,6 +74,11 @@ Note that filebeat and logstash may not work correctly with self-signed certific
 
 Set this to `"true"` to allow the use of self-signed certificates (when a CA isn't available).
 
+Modules: to enable use these variables:
+
+    filebeat_enable_modules: true
+    filebeat_modules: [nginx,mysql,iptables]
+
 ## Dependencies
 
 None.
