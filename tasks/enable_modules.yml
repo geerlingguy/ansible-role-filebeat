@@ -11,5 +11,4 @@
     mode: 0644
     owner: root
     group: root
-  when: item in filebeat_modules
   with_items: "{{ filebeat_module_configs }}"
