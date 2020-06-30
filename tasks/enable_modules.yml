@@ -7,7 +7,7 @@
 - name: Enable custom configs for enabled modules
   template:
     src: "{{ item }}"
-    dest: "{{ filebeat_config_path | dirname }}"
+    dest: "{{ filebeat_config_path | dirname }}/modules.d/"
     mode: 0644
     owner: root
     group: root
