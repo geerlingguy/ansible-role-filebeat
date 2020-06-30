@@ -11,4 +11,4 @@
     mode: 0644
     owner: root
     group: root
-    with_fileglob: "{{ filebeat_module_configs }}"
+  with_fileglob: "{{ filebeat_module_configs }}"
