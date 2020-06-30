@@ -15,7 +15,7 @@
 - include: enable_modules.yml
   when: filebeat_enable_modules | bool
   tags: [enable_filebeat_module]
-  
+
 - name: Ensure Filebeat is started and enabled at boot.
   service:
     name: filebeat
