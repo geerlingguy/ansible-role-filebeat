@@ -78,6 +78,7 @@ Modules: to enable use these variables:
 
     filebeat_enable_modules: true
     filebeat_modules: [nginx,mysql,iptables]
+    filebeat_module_configs: [] # Only when you use custom configurations.
 
 ## Dependencies
 
