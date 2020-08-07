@@ -131,6 +131,15 @@ output:
 {% endif %}
 {% endif %}
 
+{% if filebeat_output_file_enabled %}
+  file:
+    path: {{ filebeat_output_file_path }}
+    filename: {{ filebeat_output_file_filename }}
+    rotate_every_kb: {{ filebeat_output_file_rotate_every_kb }}
+    number_of_files: {{ filebeat_output_file_number_of_files }}
+    permissions: {{ filebeat_output_file_permissions }}
+{% endif %}
+
 {% if filebeat_enable_logging %}
 logging:
   ### Filebeat log

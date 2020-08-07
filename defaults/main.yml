@@ -15,6 +15,14 @@ filebeat_output_logstash_enabled: true
 filebeat_output_logstash_hosts:
   - "localhost:5044"
 
+
+filebeat_output_file_enabled: false
+filebeat_output_file_path: ""
+filebeat_output_file_filename: ""
+filebeat_output_file_rotate_every_kb: "10240"
+filebeat_output_file_number_of_files: "7"
+filebeat_output_file_permissions: "0600"
+
 filebeat_enable_logging: false
 filebeat_log_level: warning
 filebeat_log_dir: /var/log/mybeat
