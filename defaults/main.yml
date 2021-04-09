@@ -24,3 +24,8 @@ filebeat_ssl_dir: /etc/pki/logstash
 filebeat_ssl_certificate_file: ""
 filebeat_ssl_key_file: ""
 filebeat_ssl_insecure: "false"
+
+filebeat_processors: false
+filebeat_processors_forwarded: forwarded
+filebeat_processors_fields: []
+filebeat_processors_ignoremissing: true

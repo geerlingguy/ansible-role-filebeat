@@ -130,6 +130,18 @@ output:
       #curve_types: []
 {% endif %}
 
+{% if filebeat_processors %}
+processors:
+  - add_host_metadata:
+      when.not.contains.tags: {{ filebeat_processors_forwarded }}
+  - add_cloud_metadata: ~
+  - add_docker_metadata: ~
+  - add_kubernetes_metadata: ~
+  - drop_fields:
+      fields: {{ filebeat_processors_fields }}
+      ignore_missing: {{ filebeat_processors_ignoremissing }}
+{% endif %} 
+
 {% if filebeat_enable_logging %}
 logging:
   ### Filebeat log
