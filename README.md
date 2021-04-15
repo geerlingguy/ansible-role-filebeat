@@ -18,7 +18,7 @@ Controls the major version of Filebeat which is installed.
 
     filebeat_create_config: true
 
-Whether to create the Filebeat configuration file and handle the copying of SSL key and cert for filebeat. If you prefer to create a configuration file yourself you can set this to `false`.
+Whether to create the Filebeat configuration file and handle the copying of SSL key and cert for filebeat or to copy your own external template. If you prefer to create a configuration file yourself you can set this to `false`.
 
     filebeat_inputs:
       - type: log
@@ -66,6 +66,16 @@ Note that filebeat and logstash may not work correctly with self-signed certific
     filebeat_ssl_insecure: "false"
 
 Set this to `"true"` to allow the use of self-signed certificates (when a CA isn't available).
+
+### Overriding the filebeat template
+
+If you can't customize via variables because an option isn't exposed, you can override the template used to generate the filebeat configuration.
+
+    filebeat_template: "filebeat.yml.j2"
+
+You can either copy and modify the provided template, or you can, for example, point to a template file in your playbook directory that will be used instead of the managed template.
+
+    filebeat_template: "{{ playbook_dir }}/templates/filebeat.yml.j2"
 
 ## Dependencies
 
