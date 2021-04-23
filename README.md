@@ -67,6 +67,16 @@ Note that filebeat and logstash may not work correctly with self-signed certific
 
 Set this to `"true"` to allow the use of self-signed certificates (when a CA isn't available).
 
+### Overriding the filebeat template
+
+If you can't customize via variables because an option isn't exposed, you can override the template used to generate the filebeat configuration.
+
+    filebeat_template: "filebeat.yml.j2"
+
+You can either copy and modify the provided template, or you can, for example, point to a template file in your playbook directory that will be used instead of the managed template.
+
+    filebeat_template: "{{ playbook_dir }}/templates/filebeat.yml.j2"
+
 ## Dependencies
 
 None.
