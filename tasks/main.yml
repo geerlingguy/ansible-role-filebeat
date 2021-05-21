@@ -6,7 +6,9 @@
   when: ansible_os_family == 'Debian'
 
 - name: Install Filebeat.
-  package: name=filebeat state=present
+  package:
+    name: "{{ filebeat_package }}"
+    state: "{{ filebeat_package_state }}"
 
 - include: config.yml
   when: filebeat_create_config | bool

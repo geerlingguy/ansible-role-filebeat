@@ -16,6 +16,11 @@ Available variables are listed below, along with default values (see `defaults/m
 
 Controls the major version of Filebeat which is installed.
 
+    filebeat_package: filebeat
+    filebeat_package_state: present
+
+The specific package to be installed. You can specify a version of the package using the correct syntax for your platform and package manager by changing the package name. You can also control the package state (e.g. present, absent, or latest).
+
     filebeat_create_config: true
 
 Whether to create the Filebeat configuration file and handle the copying of SSL key and cert for filebeat. If you prefer to create a configuration file yourself you can set this to `false`.
