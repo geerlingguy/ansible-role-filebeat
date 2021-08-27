@@ -28,3 +28,8 @@ filebeat_ssl_dir: /etc/pki/logstash
 filebeat_ssl_certificate_file: ""
 filebeat_ssl_key_file: ""
 filebeat_ssl_insecure: "false"
+
+filebeat_elastic_cloud_enabled: false
+filebeat_elastic_cloud_id: ""
+filebeat_elastic_cloud_username: ""
+filebeat_elastic_cloud_password: ""
