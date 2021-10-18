@@ -12,7 +12,7 @@ None.
 
 Available variables are listed below, along with default values (see `defaults/main.yml`):
 
-    filebeat_version: 7.x # *for Linux only, use filebeat_windows_version for Windows*
+    filebeat_version: 7.x # for Linux only, use filebeat_windows_version for Windows
 
 Controls the major version of Filebeat which is installed.
 
@@ -76,8 +76,8 @@ Set this to `"true"` to allow the use of self-signed certificates (when a CA isn
 
 Due to different ways to package installation and service management in Windows some specific variables can be set:
 
-    filebeat_windows_version: 7.10.2 # *exact version or 'latest'*
-    filebeat_windows_configdir: 'C:\ProgramData\chocolatey\lib\filebeat\tools\' # *directory to store Filebeat config file*
+    filebeat_windows_version: 7.10.2 # exact version or 'latest'
+    filebeat_windows_configdir: 'C:\ProgramData\chocolatey\lib\filebeat\tools\' # directory to store Filebeat config file
 
 ### Overriding the filebeat template
 
