@@ -1,3 +1,6 @@
 ---
 - name: restart filebeat
   service: name=filebeat state=restarted
+
+- name: restart filebeat windows
+  win_service: name=filebeat state=restarted

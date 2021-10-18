@@ -12,7 +12,7 @@ None.
 
 Available variables are listed below, along with default values (see `defaults/main.yml`):
 
-    filebeat_version: 7.x
+    filebeat_version: 7.x # for Linux only
 
 Controls the major version of Filebeat which is installed.
 
@@ -71,6 +71,12 @@ Note that filebeat and logstash may not work correctly with self-signed certific
     filebeat_ssl_insecure: "false"
 
 Set this to `"true"` to allow the use of self-signed certificates (when a CA isn't available).
+
+### Windows-specific variables
+
+Due to different ways to package installation and service management in Windows some specific variables can be set:
+    filebeat_windows_version: 7.10.2 # exact version or 'latest'
+    filebeat_windows_configdir: 'C:\ProgramData\chocolatey\lib\filebeat\tools\' # directory to store Filebeat config file
 
 ### Overriding the filebeat template
 
