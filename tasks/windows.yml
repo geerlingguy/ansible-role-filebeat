@@ -1,9 +1,16 @@
 ---
-- name: Install Filebeat in Windows
+- name: Install Filebeat specific verion in Windows
   chocolatey.chocolatey.win_chocolatey:
     name: "{{ filebeat_package }}"
     state: "{{ filebeat_package_state }}"
     version: "{{ filebeat_windows_version }}"
+  when: filebeat_windows_version != 'latest'
+
+- name: Install Filebeat latest verion in Windows
+  chocolatey.chocolatey.win_chocolatey:
+    name: "{{ filebeat_package }}"
+    state: 'latest'
+  when: filebeat_windows_version == 'latest'
 
 - name: Copy Filebeat configuration.
   ansible.windows.win_template:
