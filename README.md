@@ -80,7 +80,7 @@ Due to different ways to package installation and service management in Windows 
 
 Set exact version or 'latest' to install latest version.
 
-    filebeat_windows_configdir: 'C:\ProgramData\chocolatey\lib\filebeat\tools\' # directory to store Filebeat config file
+    filebeat_windows_configdir: 'C:\ProgramData\chocolatey\lib\filebeat\tools\'
 
 This is default path to install Filebeat via Chocolatey package manager.
 
