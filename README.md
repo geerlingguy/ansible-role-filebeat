@@ -76,8 +76,13 @@ Set this to `"true"` to allow the use of self-signed certificates (when a CA isn
 
 Due to different ways to package installation and service management in Windows some specific variables can be set:
 
-    filebeat_windows_version: 7.10.2 # set exact version or 'latest' to install latest version
+    filebeat_windows_version: 7.10.2
+
+Set exact version or 'latest' to install latest version.
+
     filebeat_windows_configdir: 'C:\ProgramData\chocolatey\lib\filebeat\tools\' # directory to store Filebeat config file
+
+This is default path to install Filebeat via Chocolatey package manager.
 
 ### Overriding the filebeat template
 
