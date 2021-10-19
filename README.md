@@ -2,7 +2,7 @@
 
 [![CI](https://github.com/geerlingguy/ansible-role-filebeat/workflows/CI/badge.svg?event=push)](https://github.com/geerlingguy/ansible-role-filebeat/actions?query=workflow%3ACI)
 
-An Ansible Role that installs [Filebeat](https://www.elastic.co/products/beats/filebeat) on RedHat/CentOS or Debian/Ubuntu.
+An Ansible Role that installs [Filebeat](https://www.elastic.co/products/beats/filebeat) on RedHat/CentOS or Debian/Ubuntu or Windows Server 2016/2019.
 
 ## Requirements
 
@@ -12,9 +12,9 @@ None.
 
 Available variables are listed below, along with default values (see `defaults/main.yml`):
 
-    filebeat_version: 7.x # for Linux only, use filebeat_windows_version for Windows
+    filebeat_version: 7.x
 
-Controls the major version of Filebeat which is installed.
+Controls the major version of Filebeat which is installed, for Linux only, use **filebeat_windows_version** for Windows.
 
     filebeat_package: filebeat
     filebeat_package_state: present
