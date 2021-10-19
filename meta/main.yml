@@ -25,6 +25,7 @@ galaxy_info:
     - name: Windows
       versions:
         - '2019'
+        - '2016'
   galaxy_tags:
     - web
     - system
