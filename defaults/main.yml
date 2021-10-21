@@ -34,5 +34,5 @@ filebeat_elastic_cloud_id: ""
 filebeat_elastic_cloud_username: ""
 filebeat_elastic_cloud_password: ""
 
-filebeat_windows_version: '7.10.2'
+filebeat_windows_version: "7.10.2"
 filebeat_windows_configdir: 'C:\ProgramData\chocolatey\lib\filebeat\tools\'
