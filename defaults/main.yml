@@ -15,6 +15,8 @@ filebeat_output_elasticsearch_enabled: false
 filebeat_output_elasticsearch_hosts:
   - "localhost:9200"
 
+filebeat_output_elasticsearch_auth: {}
+
 filebeat_output_logstash_enabled: true
 filebeat_output_logstash_hosts:
   - "localhost:5044"
