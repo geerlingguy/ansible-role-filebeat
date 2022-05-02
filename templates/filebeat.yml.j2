@@ -15,12 +15,12 @@ output:
 
     # Optional auth via API Key or username/password.
     # The options are mutually exclusive and api_key takes the precedence.
-    {% if 'api_key' in filebeat_output_elasticsearch_auth %}
+    {%- if 'api_key' in filebeat_output_elasticsearch_auth %}
     api_key: "{{ filebeat_output_elasticsearch_auth.api_key }}"
-    {% elif 'username' in filebeat_output_elasticsearch_auth %}
+    {%- elif 'username' in filebeat_output_elasticsearch_auth %}
     username: "{{ filebeat_output_elasticsearch_auth.username }}"
     password: "{{ filebeat_output_elasticsearch_auth.password }}"
-    {% endif %}
+    {%- endif %}
 
     # Number of workers per Elasticsearch host.
     #worker: 1
