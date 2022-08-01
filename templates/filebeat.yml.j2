@@ -13,10 +13,14 @@ output:
     # Array of hosts to connect to.
     hosts: {{ filebeat_output_elasticsearch_hosts | to_json }}
 
-    # Optional protocol and basic auth credentials. These are deprecated.
-    #protocol: "https"
-    #username: "admin"
-    #password: "s3cr3t"
+    # Optional auth via API Key or username/password.
+    # The options are mutually exclusive and api_key takes the precedence.
+    {%- if 'api_key' in filebeat_output_elasticsearch_auth %}
+    api_key: "{{ filebeat_output_elasticsearch_auth.api_key }}"
+    {%- elif 'username' in filebeat_output_elasticsearch_auth %}
+    username: "{{ filebeat_output_elasticsearch_auth.username }}"
+    password: "{{ filebeat_output_elasticsearch_auth.password }}"
+    {%- endif %}
 
     # Number of workers per Elasticsearch host.
     #worker: 1
