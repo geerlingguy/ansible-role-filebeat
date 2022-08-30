@@ -40,7 +40,7 @@ Whether to enable Elasticsearch output, and which hosts to send output to.
 
     filebeat_output_elasticsearch_auth:
         username: "admin"
-        username: "S3CR3eeet"
+        password: "S3CR3eeet"
 
     # or, only for version 8+
     filebeat_output_elasticsearch_auth:
