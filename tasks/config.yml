@@ -8,22 +8,28 @@
     mode: 0644
   notify: restart filebeat
 
-- name: Ensure Filebeat SSL key pair directory exists.
+- name: Ensure Filebeat SSL directories exist.
   file:
-    path: "{{ filebeat_ssl_dir }}"
+    path: "{{ item }}"
     state: directory
     mode: 0755
+  loop:
+    - filebeat_ssl_certs_dir
+    - filebeat_ssl_private_dir
   when: filebeat_ssl_key_file | default(false)
 
 - name: Copy SSL key and cert for filebeat.
   copy:
-    src: "{{ item }}"
-    dest: "{{ filebeat_ssl_dir }}/{{ item | basename }}"
+    src: "{{ item.file }}"
+    dest: "{{ item.dir }}/{{ item.file | basename }}"
     mode: 0644
   with_items:
-    - "{{ filebeat_ssl_key_file }}"
-    - "{{ filebeat_ssl_certificate_file }}"
+    - "{ dir: {{ filebeat_ssl_private_dir }}, file: {{ filebeat_ssl_key_file }} }"
+    - "{ dir: {{ filebeat_ssl_certs_dir }}, file: {{ filebeat_ssl_certificate_file }} }"
   notify: restart filebeat
   when:
+    - filebeat_ssl_copy_files
     - filebeat_ssl_key_file | default(false)
     - filebeat_ssl_certificate_file | default(false)
+
+#- name: Ensure filebeat can read system's private key
