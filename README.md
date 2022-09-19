@@ -61,14 +61,20 @@ Whether to enable Logstash output, and which hosts to send output to.
 
 Filebeat logging.
 
-    filebeat_ssl_dir: /etc/pki/logstash
+    filebeat_ssl_certs_dir: /etc/pki/logstash
+    filebeat_ssl_private_dir: "{{ filebeat_ssl_certs_dir }}"
 
 The path where certificates and keyfiles will be stored.
 
+    filebeat_ssl_ca_file: ""
     filebeat_ssl_certificate_file: ""
     filebeat_ssl_key_file: ""
 
-Local paths to the SSL certificate and key files, which will be copied into the `filebeat_ssl_dir`.
+Local paths to the SSL certificate and key files.
+
+    filebeat_ssl_copy_file: true
+
+Wether to copy certificate and key into the `filebeat_ssl_dir`, or use existing ones.
 
 For utmost security, you should use your own valid certificate and keyfile, and update the `filebeat_ssl_*` variables in your playbook to use your certificate.
 
