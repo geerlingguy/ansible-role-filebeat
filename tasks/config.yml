@@ -24,8 +24,10 @@
     dest: "{{ item.dir }}/{{ item.file | basename }}"
     mode: 0644
   with_items:
-    - "{ dir: {{ filebeat_ssl_private_dir }}, file: {{ filebeat_ssl_key_file }} }"
-    - "{ dir: {{ filebeat_ssl_certs_dir }}, file: {{ filebeat_ssl_certificate_file }} }"
+    - dir: "{{ filebeat_ssl_private_dir }}"
+      file: "{{ filebeat_ssl_key_file }}"
+    - dir: "{{ filebeat_ssl_certs_dir }}"
+      file: "{{ filebeat_ssl_certificate_file }}"
   notify: restart filebeat
   when:
     - filebeat_ssl_copy_files
