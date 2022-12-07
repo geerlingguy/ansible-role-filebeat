@@ -41,7 +41,7 @@ jobs:
     strategy:
       matrix:
         distro:
-          - centos7
+          - rockylinux8
           - ubuntu2004
           - debian11
 
