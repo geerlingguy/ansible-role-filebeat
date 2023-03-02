@@ -46,7 +46,7 @@ Whether to enable Elasticsearch output, and which hosts to send output to.
     filebeat_output_elasticsearch_auth:
         api_key: "xa-123a-f3ea012d-aaae1"
 
-Configures the authentication for the elasticsearch output. Note that api_key and user/pass are mutually exclusive, andd api_key is only available from version 8.
+Configures the authentication for the elasticsearch output. Note that api_key and user/pass are mutually exclusive, and api_key is only available from version 8.
 
     filebeat_output_logstash_enabled: true
     filebeat_output_logstash_hosts:
