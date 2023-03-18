@@ -34,4 +34,4 @@
     - filebeat_ssl_key_file | default(false)
     - filebeat_ssl_certificate_file | default(false)
 
-#- name: Ensure filebeat can read system's private key
+# - name: Ensure filebeat can read system's private key
