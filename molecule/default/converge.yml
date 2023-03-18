@@ -5,18 +5,24 @@
 
   pre_tasks:
     - name: Update apt cache.
-      apt: update_cache=true cache_valid_time=600
+      ansible.builtin.apt:
+        update_cache: true
+        cache_valid_time: 600
       when: ansible_os_family == 'Debian'
 
     - name: Install test dependencies (RedHat).
-      package: name=which state=present
+      ansible.builtin.package:
+        name: which
+        state: present
       when: ansible_os_family == 'RedHat'
 
     - name: Install test dependencies.
-      package: name=curl state=present
+      ansible.builtin.package:
+        name: curl
+        state: present
 
     - name: Set the java_packages variable (Ubuntu).
-      set_fact:
+      ansible.builtin.set_fact:
         java_packages:
           - openjdk-8-jdk
       when: ansible_distribution == 'Ubuntu'

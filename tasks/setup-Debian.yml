@@ -1,19 +1,19 @@
 ---
 - name: Ensure required dependencies are present.
-  apt:
+  ansible.builtin.apt:
     name:
       - apt-transport-https
       - gnupg2
     state: present
 
 - name: Add Elasticsearch apt key.
-  apt_key:
+  ansible.builtin.apt_key:
     url: https://artifacts.elastic.co/GPG-KEY-elasticsearch
     id: 46095ACC8548582C1A2699A9D27D666CD88E42B4
     state: present
 
 - name: Add Filebeat repository.
-  apt_repository:
+  ansible.builtin.apt_repository:
     repo: 'deb https://artifacts.elastic.co/packages/{{ filebeat_version }}/apt stable main'
     state: present
     update_cache: true

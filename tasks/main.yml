@@ -1,20 +1,23 @@
 ---
-- include_tasks: setup-RedHat.yml
+- name: Include setup-RedHat
+  ansible.builtin.include_tasks: setup-RedHat.yml
   when: ansible_os_family == 'RedHat'
 
-- include_tasks: setup-Debian.yml
+- name: Include setup-Debian
+  ansible.builtin.include_tasks: setup-Debian.yml
   when: ansible_os_family == 'Debian'
 
 - name: Install Filebeat.
-  package:
+  ansible.builtin.package:
     name: "{{ filebeat_package }}"
     state: "{{ filebeat_package_state }}"
 
-- include_tasks: config.yml
+- name: Include config
+  ansible.builtin.include_tasks: config.yml
   when: filebeat_create_config | bool
 
 - name: Ensure Filebeat is started and enabled at boot.
-  service:
+  ansible.builtin.service:
     name: filebeat
     state: started
     enabled: true
