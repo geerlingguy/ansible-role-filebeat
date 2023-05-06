@@ -88,6 +88,15 @@ Note that filebeat and logstash may not work correctly with self-signed certific
 
 Set this to `"true"` to allow the use of self-signed certificates (when a CA isn't available).
 
+    filebeat_modules: true
+
+Wether to enable filebeat modules by creating the relevant configuration options.
+
+    filebeat_modules_path: "${path.config}/modules.d/*.yml"
+    filebeat_modules_reload: false
+
+Path of the filebeat modules directory (${path.config} contains the base path to filebeat.yml). If you want to enable automatic reloading of module configuration, you can set filebeat_modules_reload to `"true"`.
+
 ### Overriding the filebeat template
 
 If you can't customize via variables because an option isn't exposed, you can override the template used to generate the filebeat configuration.
