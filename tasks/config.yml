@@ -14,8 +14,8 @@
     state: directory
     mode: 0755
   loop:
-    - filebeat_ssl_certs_dir
-    - filebeat_ssl_private_dir
+    - "{{ filebeat_ssl_certs_dir }}"
+    - "{{ filebeat_ssl_private_dir }}"
   when: filebeat_ssl_key_file | default(false)
 
 - name: Copy SSL key and cert for filebeat.
