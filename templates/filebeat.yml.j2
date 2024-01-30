@@ -3,6 +3,18 @@ filebeat:
   inputs:
     {{ filebeat_inputs | to_json }}
 
+{% if filebeat_modules %}
+  config.modules:
+    # Glob pattern for configuration loading
+    path: {{ filebeat_modules_path }}
+
+    # Set to true to enable config reloading
+    reload.enabled: {{ filebeat_modules_reload | to_json }}
+
+    # Period on which files under path should be checked for changes
+    #reload.period: 10s
+{% endif %}
+
 # Configure what outputs to use when sending the data collected by the beat.
 # Multiple outputs may be used.
 output:
