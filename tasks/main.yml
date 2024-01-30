@@ -5,7 +5,7 @@
 - include_tasks: setup-Debian.yml
   when: ansible_os_family == 'Debian'
 
-- name: Install Filebeat.
+- name: Install Filebeat
   package:
     name: "{{ filebeat_package }}"
     state: "{{ filebeat_package_state }}"
