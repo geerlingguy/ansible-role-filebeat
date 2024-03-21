@@ -38,3 +38,5 @@ filebeat_elastic_cloud_enabled: false
 filebeat_elastic_cloud_id: ""
 filebeat_elastic_cloud_username: ""
 filebeat_elastic_cloud_password: ""
+
+filebeat_repo: "https://artifacts.elastic.co/packages/"
