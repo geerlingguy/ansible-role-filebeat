@@ -30,7 +30,11 @@ output:
     #index: "filebeat"
 
     # Optional HTTP Path
+    {% if filebeat_output_elasticsearch_path -%}
+    path: "{{ filebeat_output_elasticsearch_path }}"
+    {% else -%}
     #path: "/elasticsearch"
+    {% endif %}
 
     # Proxy server URL
     # proxy_url: http://proxy:3128
