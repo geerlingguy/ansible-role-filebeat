@@ -7,13 +7,28 @@
     state: present
 
 - name: Add Elasticsearch apt key.
-  apt_key:
-    url: https://artifacts.elastic.co/GPG-KEY-elasticsearch
-    id: 46095ACC8548582C1A2699A9D27D666CD88E42B4
-    state: present
+  ansible.builtin.get_url:
+    url: "{{ filebeat_elastic_apt_gpg_key }}"
+    dest: /etc/apt/trusted.gpg.d/filebeat.asc
+    mode: '0644'
+    force: true
+  register: add_repository_key
+  ignore_errors: "{{ filebeat_apt_ignore_key_error }}"
+  when: filebeat_add_repo | bool
+
+- name: Ensure curl is present (on older systems without SNI).
+  package: name=curl state=present
+  when: add_repository_key is failed and filebeat_add_repo | bool
+
+- name: Add Elasticsearch apt key (alternative for older systems without SNI).
+  shell: >
+    curl -sSL {{ filebeat_elastic_apt_gpg_key }} | apt-key add -
+  when: add_repository_key is failed and filebeat_add_repo | bool
+
 
 - name: Add Filebeat repository.
   apt_repository:
-    repo: 'deb https://artifacts.elastic.co/packages/{{ filebeat_version }}/apt stable main'
+    repo: 'deb [signed-by=/etc/apt/trusted.gpg.d/filebeat.asc] https://artifacts.elastic.co/packages/{{ filebeat_version }}/apt stable main'
     state: present
     update_cache: true
+
