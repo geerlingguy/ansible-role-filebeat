@@ -88,6 +88,10 @@ Note that filebeat and logstash may not work correctly with self-signed certific
 
 Set this to `"true"` to allow the use of self-signed certificates (when a CA isn't available).
 
+    filebeat_name: ""
+
+Sets the name of the filebeat. If not set the hostname is used. 
+
 ### Overriding the filebeat template
 
 If you can't customize via variables because an option isn't exposed, you can override the template used to generate the filebeat configuration.

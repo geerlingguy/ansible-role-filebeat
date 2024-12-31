@@ -1,3 +1,7 @@
+{% if filebeat_name is defined and filebeat_name != "" %}
+name: {{ filebeat_name }}
+
+{% endif %}
 filebeat:
   # List of inputs.
   inputs:
