@@ -25,6 +25,11 @@
     curl -sSL {{ filebeat_elastic_apt_gpg_key }} | apt-key add -
   when: add_repository_key is failed and filebeat_add_repo | bool
 
+- name: Remove legacy Filebeat repository.
+  apt_repository:
+    repo: 'deb https://artifacts.elastic.co/packages/{{ filebeat_version }}/apt stable main'
+    state: absent
+    update_cache: true
 
 - name: Add Filebeat repository.
   apt_repository:
