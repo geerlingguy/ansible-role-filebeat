@@ -9,7 +9,12 @@
       when: ansible_os_family == 'Debian'
 
     - name: Install test dependencies (RedHat).
-      package: name=which state=present
+      dnf:
+        name:
+          - which
+          - curl
+        allowerasing: true
+        state: present
       when: ansible_os_family == 'RedHat'
 
     - name: Install test dependencies.
