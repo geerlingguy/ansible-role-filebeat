@@ -1,6 +1,6 @@
 # Ansible Role: Filebeat for ELK Stack
 
-[![CI](https://github.com/geerlingguy/ansible-role-filebeat/workflows/CI/badge.svg?event=push)](https://github.com/geerlingguy/ansible-role-filebeat/actions?query=workflow%3ACI)
+[![CI](https://github.com/geerlingguy/ansible-role-filebeat/actions/workflows/ci.yml/badge.svg)](https://github.com/geerlingguy/ansible-role-filebeat/actions/workflows/ci.yml)
 
 An Ansible Role that installs [Filebeat](https://www.elastic.co/products/beats/filebeat) on RedHat/CentOS or Debian/Ubuntu.
 
