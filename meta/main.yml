@@ -7,17 +7,24 @@ galaxy_info:
   description: Filebeat for Linux.
   company: "Midwestern Mac, LLC"
   license: "license (BSD, MIT)"
-  min_ansible_version: 2.10
+  min_ansible_version: "2.15"
   platforms:
     - name: Debian
       versions:
         - jessie
         - stretch
+        - buster
+        - bullseye
+        - bookworm
+        - trixie
     - name: Ubuntu
       versions:
         - trusty
         - xenial
         - bionic
+        - focal
+        - jammy
+        - noble
   galaxy_tags:
     - web
     - system

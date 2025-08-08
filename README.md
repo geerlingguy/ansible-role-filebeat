@@ -2,11 +2,11 @@
 
 [![CI](https://github.com/geerlingguy/ansible-role-filebeat/actions/workflows/ci.yml/badge.svg)](https://github.com/geerlingguy/ansible-role-filebeat/actions/workflows/ci.yml)
 
-An Ansible Role that installs [Filebeat](https://www.elastic.co/products/beats/filebeat) on RedHat/CentOS or Debian/Ubuntu.
+An Ansible Role that installs [Filebeat](https://www.elastic.co/products/beats/filebeat) on RedHat/CentOS or Debian/Ubuntu. Supports both traditional APT repository format and the  DEB822 format for Debian 13+ and Ubuntu 24+.
 
 ## Requirements
 
-None.
+- Ansible 2.15+ (required for DEB822 repository format support on modern Debian/Ubuntu systems)
 
 ## Role Variables
 
@@ -15,6 +15,13 @@ Available variables are listed below, along with default values (see `defaults/m
     filebeat_version: 7.x
 
 Controls the major version of Filebeat which is installed.
+
+    filebeat_repo_format: auto
+
+Controls the repository format used for Debian/Ubuntu systems. Options:
+- `auto` (default): Automatically choose format based on OS version (DEB822 for Debian 13+ and Ubuntu 24+, traditional format for older versions)
+- `traditional`: Force traditional apt_repository format
+- `deb822`: Force DEB822 repository format
 
     filebeat_package: filebeat
     filebeat_package_state: present
