@@ -46,3 +46,46 @@
       (ansible_distribution == "Debian" and ansible_distribution_major_version | int >= 12) or
       (ansible_distribution == "Ubuntu" and ansible_distribution_major_version | int >= 22)
     ))
+
+- name: Remove old Elasticsearch APT key when using DEB822 format.
+  apt_key:
+    id: 46095ACC8548582C1A2699A9D27D666CD88E42B4
+    state: absent
+  when: >
+    filebeat_cleanup_old_sources and (
+      filebeat_repo_format == 'deb822' or
+      (filebeat_repo_format == 'auto' and (
+        (ansible_distribution == "Debian" and ansible_distribution_major_version | int >= 12) or
+        (ansible_distribution == "Ubuntu" and ansible_distribution_major_version | int >= 22)
+      ))
+    )
+
+- name: Remove old Elasticsearch repository from sources.list.d when using DEB822 format.
+  apt_repository:
+    repo: 'deb https://artifacts.elastic.co/packages/{{ filebeat_version }}/apt stable main'
+    state: absent
+  when: >
+    filebeat_cleanup_old_sources and (
+      filebeat_repo_format == 'deb822' or
+      (filebeat_repo_format == 'auto' and (
+        (ansible_distribution == "Debian" and ansible_distribution_major_version | int >= 12) or
+        (ansible_distribution == "Ubuntu" and ansible_distribution_major_version | int >= 22)
+      ))
+    )
+
+- name: Remove potential old Elasticsearch repository files.
+  file:
+    path: "{{ item }}"
+    state: absent
+  loop:
+    - /etc/apt/sources.list.d/elasticsearch.list
+    - /etc/apt/sources.list.d/elastic-{{ filebeat_version }}.list
+    - /etc/apt/sources.list.d/filebeat.list
+  when: >
+    filebeat_cleanup_old_sources and (
+      filebeat_repo_format == 'deb822' or
+      (filebeat_repo_format == 'auto' and (
+        (ansible_distribution == "Debian" and ansible_distribution_major_version | int >= 12) or
+        (ansible_distribution == "Ubuntu" and ansible_distribution_major_version | int >= 22)
+      ))
+    )

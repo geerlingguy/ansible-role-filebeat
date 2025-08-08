@@ -9,6 +9,9 @@ filebeat_package_state: present
 # Set to 'deb822' to force DEB822 format
 filebeat_repo_format: auto
 
+# Whether to clean up old repository sources when using DEB822 format
+filebeat_cleanup_old_sources: true
+
 filebeat_create_config: true
 filebeat_template: "filebeat.yml.j2"
 

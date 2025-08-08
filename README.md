@@ -19,9 +19,13 @@ Controls the major version of Filebeat which is installed.
     filebeat_repo_format: auto
 
 Controls the repository format used for Debian/Ubuntu systems. Options:
-- `auto` (default): Automatically choose format based on OS version (DEB822 for Debian 13+ and Ubuntu 24+, traditional format for older versions)
+- `auto` (default): Automatically choose format based on OS version (DEB822 for Debian 12+ and Ubuntu 22+, traditional format for older versions)
 - `traditional`: Force traditional apt_repository format
 - `deb822`: Force DEB822 repository format
+
+    filebeat_cleanup_old_sources: true
+
+Whether to clean up old repository source list entries when using DEB822 format. When enabled, this will remove old APT keys and source list files to prevent conflicts between traditional and DEB822 repository formats.
 
     filebeat_package: filebeat
     filebeat_package_state: present
