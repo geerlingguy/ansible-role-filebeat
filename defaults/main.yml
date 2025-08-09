@@ -10,7 +10,8 @@ filebeat_package_state: present
 filebeat_repo_format: auto
 
 # Whether to clean up old repository sources when using DEB822 format
-filebeat_cleanup_old_sources: true
+# Set to false by default to avoid conflicts with other Elastic Stack components
+filebeat_cleanup_old_sources: false
 
 filebeat_create_config: true
 filebeat_template: "filebeat.yml.j2"

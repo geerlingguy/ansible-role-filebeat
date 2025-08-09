@@ -6,6 +6,17 @@
       - gnupg2
     state: present
 
+- name: Ensure python3-debian is present for DEB822 repository management.
+  apt:
+    name: python3-debian
+    state: present
+  when: >
+    filebeat_repo_format == 'deb822' or
+    (filebeat_repo_format == 'auto' and (
+      (ansible_distribution == "Debian" and ansible_distribution_major_version | int >= 12) or
+      (ansible_distribution == "Ubuntu" and ansible_distribution_major_version | int >= 22)
+    ))
+
 - name: Add Elasticsearch apt key (for traditional repository format).
   apt_key:
     url: https://artifacts.elastic.co/GPG-KEY-elasticsearch
@@ -39,6 +50,15 @@
     components: [main]
     signed_by: https://artifacts.elastic.co/GPG-KEY-elasticsearch
     state: present
+  when: >
+    filebeat_repo_format == 'deb822' or
+    (filebeat_repo_format == 'auto' and (
+      (ansible_distribution == "Debian" and ansible_distribution_major_version | int >= 12) or
+      (ansible_distribution == "Ubuntu" and ansible_distribution_major_version | int >= 22)
+    ))
+
+- name: Update apt cache after adding DEB822 repository.
+  apt:
     update_cache: true
   when: >
     filebeat_repo_format == 'deb822' or
