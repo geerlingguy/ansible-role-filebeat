@@ -3,15 +3,10 @@ filebeat_version: 7.x
 filebeat_package: filebeat
 filebeat_package_state: present
 
-# Repository configuration
-# Set to 'auto' to automatically choose format based on OS version
-# Set to 'traditional' to force traditional apt_repository format
-# Set to 'deb822' to force DEB822 format
-filebeat_repo_format: auto
-
-# Whether to clean up old repository sources when using DEB822 format
-# Set to false by default to avoid conflicts with other Elastic Stack components
-filebeat_cleanup_old_sources: false
+# Repository configuration is automatic based on OS version:
+# - Debian 12+ and Ubuntu 22+ use DEB822 format (modern systems)
+# - Older systems use traditional apt_repository format
+# Old repository sources are automatically cleaned up on modern systems
 
 filebeat_create_config: true
 filebeat_template: "filebeat.yml.j2"

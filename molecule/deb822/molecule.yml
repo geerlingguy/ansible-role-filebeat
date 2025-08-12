@@ -29,9 +29,5 @@ provisioner:
     converge: ${MOLECULE_PLAYBOOK:-converge.yml}
   inventory:
     host_vars:
-      ubuntu2404-deb822:
-        filebeat_repo_format: deb822
-        filebeat_cleanup_old_sources: true
-      debian12-deb822:
-        filebeat_repo_format: auto
-        filebeat_cleanup_old_sources: true
+      ubuntu2404-deb822: {}
+      debian12-deb822: {}

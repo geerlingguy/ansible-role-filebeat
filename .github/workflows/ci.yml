@@ -55,6 +55,14 @@ jobs:
             scenario: deb822
           - distro: debian12
             scenario: deb822
+          - distro: ubuntu2204
+            scenario: deb822
+          - distro: debian11
+            scenario: deb822
+          - distro: ubuntu2004
+            scenario: deb822
+          - distro: debian13
+            scenario: deb822
 
     steps:
       - name: Check out the codebase.
@@ -75,102 +83,4 @@ jobs:
         env:
           PY_COLORS: '1'
           ANSIBLE_FORCE_COLOR: '1'
-          MOLECULE_DISTRO: ${{ matrix.distro }}
-
-  repository-format-tests:
-    name: Repository Format Tests
-    runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        include:
-          - distro: ubuntu2404
-            repo_format: auto
-            expected_format: deb822
-          - distro: ubuntu2404
-            repo_format: traditional
-            expected_format: traditional
-          - distro: ubuntu2404
-            repo_format: deb822
-            expected_format: deb822
-          - distro: debian12
-            repo_format: auto
-            expected_format: deb822
-          - distro: debian11
-            repo_format: auto
-            expected_format: traditional
-
-    steps:
-      - name: Check out the codebase.
-        uses: actions/checkout@v4
-        with:
-          path: 'geerlingguy.filebeat'
-
-      - name: Set up Python 3.
-        uses: actions/setup-python@v5
-        with:
-          python-version: '3.x'
-
-      - name: Install test dependencies.
-        run: pip3 install ansible molecule molecule-plugins[docker] docker
-
-      - name: Create test playbook for repository format validation.
-        run: |
-          cat > validate-repo-format.yml << 'EOF'
-          ---
-          - name: Test repository format
-            hosts: all
-            become: yes
-            vars:
-              filebeat_repo_format: ${{ matrix.repo_format }}
-              filebeat_version: 8.x
-            tasks:
-              - name: Include role tasks
-                include_tasks: tasks/setup-Debian.yml
-                when: ansible_os_family == 'Debian'
-
-              - name: Check if DEB822 repository exists
-                stat:
-                  path: /etc/apt/sources.list.d/elasticsearch.sources
-                register: deb822_repo
-                when: ansible_os_family == 'Debian'
-
-              - name: Check if traditional repository exists
-                shell: grep -r "artifacts.elastic.co" /etc/apt/sources.list.d/*.list || true
-                register: traditional_repo
-                when: ansible_os_family == 'Debian'
-                changed_when: false
-
-              - name: Validate DEB822 format is used when expected
-                assert:
-                  that:
-                    - deb822_repo.stat.exists
-                  msg: "DEB822 repository file should exist"
-                when:
-                  - ansible_os_family == 'Debian'
-                  - "'${{ matrix.expected_format }}' == 'deb822'"
-
-              - name: Validate traditional format is used when expected
-                assert:
-                  that:
-                    - traditional_repo.stdout != ""
-                  msg: "Traditional repository should exist"
-                when:
-                  - ansible_os_family == 'Debian'
-                  - "'${{ matrix.expected_format }}' == 'traditional'"
-          EOF
-
-      - name: Run repository format validation.
-        run: |
-          molecule create
-          molecule converge -s default -- --extra-vars "filebeat_repo_format=${{ matrix.repo_format }}"
-          ansible-playbook -i molecule/default/.molecule/ansible_inventory/hosts validate-repo-format.yml
-        env:
-          PY_COLORS: '1'
-          ANSIBLE_FORCE_COLOR: '1'
-          MOLECULE_DISTRO: ${{ matrix.distro }}
-
-      - name: Cleanup.
-        run: molecule destroy
-        if: always()
-        env:
           MOLECULE_DISTRO: ${{ matrix.distro }}
