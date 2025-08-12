@@ -82,10 +82,8 @@
       echo "absent"
     fi
   register: repo_file_formats
-  loop:
-    - /etc/apt/sources.list.d/elasticsearch.list
-    - /etc/apt/sources.list.d/artifacts_elastic_co_packages_{{ filebeat_version | replace('.','_') }}_apt.list
-    - /etc/apt/sources.list.d/filebeat.list
+  with_fileglob:
+    - /etc/apt/sources.list.d/artifacts_elastic_co_packages_*_apt.list
   changed_when: false
   when: >
     (ansible_distribution == "Debian" and ansible_distribution_major_version | int >= 12) or
