@@ -84,7 +84,7 @@
   register: repo_file_formats
   loop:
     - /etc/apt/sources.list.d/elasticsearch.list
-    - /etc/apt/sources.list.d/elastic-{{ filebeat_version }}.list
+    - /etc/apt/sources.list.d/artifacts_elastic_co_packages_{{ filebeat_version | replace('.','_') }}_apt.list
     - /etc/apt/sources.list.d/filebeat.list
   changed_when: false
   when: >
