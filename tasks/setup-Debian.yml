@@ -69,34 +69,12 @@
     (ansible_distribution == "Debian" and ansible_distribution_major_version | int >= 12) or
     (ansible_distribution == "Ubuntu" and ansible_distribution_major_version | int >= 22)
 
-- name: Check repository file formats before cleanup.
-  shell: |
-    if [ -f "{{ item }}" ]; then
-      # Check if file contains DEB822 format (has "Types:" field)
-      if grep -q "^Types:" "{{ item }}"; then
-        echo "deb822"
-      else
-        echo "traditional"
-      fi
-    else
-      echo "absent"
-    fi
-  register: repo_file_formats
+- name: Remove old traditional repository files when using DEB822 format.
+  file:
+    path: "{{ item }}"
+    state: absent
   with_fileglob:
-    - /etc/apt/sources.list.d/artifacts_elastic_co_packages_*_apt.list
-  changed_when: false
+    - "/etc/apt/sources.list.d/artifacts_elastic_co_packages_*_apt.list"
   when: >
     (ansible_distribution == "Debian" and ansible_distribution_major_version | int >= 12) or
     (ansible_distribution == "Ubuntu" and ansible_distribution_major_version | int >= 22)
-
-- name: Remove old traditional repository files (skip DEB822 format files).
-  file:
-    path: "{{ item.item }}"
-    state: absent
-  loop: "{{ repo_file_formats.results | default([]) }}"
-  when: >
-    item.stdout is defined and
-    item.stdout == "traditional" and (
-      (ansible_distribution == "Debian" and ansible_distribution_major_version | int >= 12) or
-      (ansible_distribution == "Ubuntu" and ansible_distribution_major_version | int >= 22)
-    )
