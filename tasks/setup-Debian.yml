@@ -1,19 +1,38 @@
 ---
+- name: Ensure apt key is not present in trusted.gpg.d
+  ansible.builtin.file:
+    path: /etc/apt/trusted.gpg.d/filebeat.asc
+    state: absent
+
+- name: find all old apt source lists for filebeat
+  ansible.builtin.find:
+    paths: /etc/apt/sources.list.d/
+    patterns: 'artifacts_elastic_co_packages_*_apt.list'
+  register: old_filebeat_apt_lists
+
+- name: Ensure old apt source list is not present in /etc/apt/sources.list.d
+  ansible.builtin.file:
+    path: "{{ item.path }}"
+    state: absent
+  loop: "{{ old_filebeat_apt_lists.files }}"
+
 - name: Ensure required dependencies are present.
   apt:
     name:
-      - apt-transport-https
-      - gnupg2
-    state: present
-
-- name: Add Elasticsearch apt key.
-  apt_key:
-    url: https://artifacts.elastic.co/GPG-KEY-elasticsearch
-    id: 46095ACC8548582C1A2699A9D27D666CD88E42B4
+      - python3-debian
+      - ca-certificates
     state: present
 
 - name: Add Filebeat repository.
-  apt_repository:
-    repo: 'deb https://artifacts.elastic.co/packages/{{ filebeat_version }}/apt stable main'
+  ansible.builtin.deb822_repository:
+    name: elasticsearch
+    types: [deb]
+    uris: https://artifacts.elastic.co/packages/{{ filebeat_version }}/apt
+    suites: [stable]
+    components: [main]
+    signed_by: https://artifacts.elastic.co/GPG-KEY-elasticsearch
     state: present
+
+- name: Update apt cache.
+  ansible.builtin.apt:
     update_cache: true

@@ -28,6 +28,4 @@
 
   roles:
     - role: geerlingguy.java
-    - role: geerlingguy.elasticsearch
-    - role: geerlingguy.logstash
     - role: geerlingguy.filebeat
