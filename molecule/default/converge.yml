@@ -1,7 +1,7 @@
 ---
 - name: Converge
   hosts: all
-  #become: true
+  # become: true
 
   pre_tasks:
     - name: Update apt cache.
@@ -28,6 +28,4 @@
 
   roles:
     - role: geerlingguy.java
-    - role: geerlingguy.elasticsearch
-    - role: geerlingguy.logstash
     - role: geerlingguy.filebeat
