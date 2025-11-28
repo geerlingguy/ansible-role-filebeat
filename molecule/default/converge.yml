@@ -6,7 +6,7 @@
   pre_tasks:
     - name: Update apt cache.
       apt: update_cache=true cache_valid_time=600
-      when: ansible_os_family == 'Debian'
+      when: ansible_facts.os_family == 'Debian'
 
     - name: Install test dependencies (RedHat).
       dnf:
@@ -15,7 +15,7 @@
           - curl
         allowerasing: true
         state: present
-      when: ansible_os_family == 'RedHat'
+      when: ansible_facts.os_family == 'RedHat'
 
     - name: Install test dependencies.
       package: name=curl state=present
@@ -24,7 +24,7 @@
       set_fact:
         java_packages:
           - openjdk-8-jdk
-      when: ansible_distribution == 'Ubuntu'
+      when: ansible_facts.distribution == 'Ubuntu'
 
   roles:
     - role: geerlingguy.java

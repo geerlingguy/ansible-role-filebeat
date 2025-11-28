@@ -114,7 +114,7 @@ None.
       set_fact:
         java_packages:
           - openjdk-8-jdk
-      when: ansible_os_family == 'Debian'
+      when: ansible_facts.os_family == 'Debian'
     
       roles:
         - geerlingguy.java
