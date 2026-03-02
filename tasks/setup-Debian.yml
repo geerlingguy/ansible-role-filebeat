@@ -4,10 +4,10 @@
     path: /etc/apt/trusted.gpg.d/filebeat.asc
     state: absent
 
-- name: find all old apt source lists for filebeat
+- name: Find all old apt source lists for filebeat
   ansible.builtin.find:
     paths: /etc/apt/sources.list.d/
-    patterns: 'artifacts_elastic_co_packages_*_apt.list'
+    patterns: "artifacts_elastic_co_packages_*_apt.list"
   register: old_filebeat_apt_lists
 
 - name: Ensure old apt source list is not present in /etc/apt/sources.list.d
@@ -17,7 +17,7 @@
   loop: "{{ old_filebeat_apt_lists.files }}"
 
 - name: Ensure required dependencies are present.
-  apt:
+  ansible.builtin.apt:
     name:
       - python3-debian
       - ca-certificates
