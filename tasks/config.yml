@@ -5,14 +5,14 @@
     dest: "/etc/filebeat/filebeat.yml"
     owner: root
     group: root
-    mode: 0644
+    mode: "0644"
   notify: Restart filebeat
 
 - name: Ensure Filebeat SSL directories exist.
   ansible.builtin.file:
     path: "{{ item }}"
     state: directory
-    mode: 0755
+    mode: "0755"
   loop:
     - "{{ filebeat_ssl_certs_dir }}"
     - "{{ filebeat_ssl_private_dir }}"
@@ -22,7 +22,7 @@
   ansible.builtin.copy:
     src: "{{ item.file }}"
     dest: "{{ item.dir }}/{{ item.file | basename }}"
-    mode: 0644
+    mode: "0644"
   with_items:
     - dir: "{{ filebeat_ssl_private_dir }}"
       file: "{{ filebeat_ssl_key_file }}"

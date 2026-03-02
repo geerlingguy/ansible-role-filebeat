@@ -8,4 +8,4 @@
   ansible.builtin.template:
     src: beats.repo.j2
     dest: /etc/yum.repos.d/beats.repo
-    mode: 0644
+    mode: "0644"
