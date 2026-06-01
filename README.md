@@ -55,11 +55,12 @@ Configures the authentication for the elasticsearch output. Note that api_key an
 Whether to enable Logstash output, and which hosts to send output to.
 
     filebeat_enable_logging: false
+    filebeat_log_target: files
     filebeat_log_level: warning
     filebeat_log_dir: /var/log/filebeat
     filebeat_log_filename: filebeat.log
 
-Filebeat logging.
+Filebeat logging. Set `filebeat_log_target: syslog` if you want to log to syslog.
 
     filebeat_ssl_certs_dir: /etc/pki/logstash
     filebeat_ssl_private_dir: "{{ filebeat_ssl_certs_dir }}"
