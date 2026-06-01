@@ -144,6 +144,15 @@ logging:
   ### Filebeat log
   level: {{ filebeat_log_level }}
 
+{% if filebeat_log_target == 'syslog' %}
+  # Do not log to files
+  to_files: false
+
+  # Do log to syslog
+  to_syslog: true
+{% endif %}
+
+{% if filebeat_log_target == 'files' %}
   # Enable file rotation with default configuration
   to_files: true
 
@@ -154,6 +163,7 @@ logging:
     path: {{ filebeat_log_dir }}
     name: {{ filebeat_log_filename }}
     keepfiles: 7
+{% endif %}
 {% endif %}
 
 {% if filebeat_elastic_cloud_enabled %}

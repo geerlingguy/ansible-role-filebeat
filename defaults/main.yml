@@ -22,6 +22,7 @@ filebeat_output_logstash_hosts:
   - "localhost:5044"
 
 filebeat_enable_logging: false
+filebeat_log_target: files
 filebeat_log_level: warning
 filebeat_log_dir: /var/log/mybeat
 filebeat_log_filename: mybeat.log
